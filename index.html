@@ -366,6 +366,7 @@
       <form id="reviewFormEl" name="review" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="margin-top:2px;">
         <input type="hidden" name="form-name" value="review" />
         <input type="hidden" name="rating" id="rratingInput" value="" />
+        <input type="hidden" name="lang" id="rlangInput" value="fr" />
         <p class="hp"><label>Ne pas remplir : <input name="bot-field" /></label></p>
         <div class="field"><label data-i18n="f_name">Your name</label><input id="rname" name="name" type="text" required data-i18n-ph="ph_first" placeholder="First name" /></div>
         <div class="field"><label data-i18n="r_review">Your review</label><textarea id="rtxt" name="review" required data-i18n-ph="ph_share" placeholder="Share your experience…"></textarea></div>
@@ -631,7 +632,9 @@ var REVIEWS_SEED = [
 var PUBLISHED_REVIEWS = null; /* filled from data/reviews.json when available */
 function loadReviews(){
   var src = (PUBLISHED_REVIEWS && PUBLISHED_REVIEWS.length) ? PUBLISHED_REVIEWS : REVIEWS_SEED;
-  return src.slice().sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
+  return src.slice()
+    .filter(function(r){ return r.published !== false; })  /* pending reviews stay hidden until validated */
+    .sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
 }
 function formatReviewDate(iso, lang){
   if(!iso) return '';
@@ -678,6 +681,7 @@ document.getElementById('reviewFormEl').addEventListener('submit', function(e){
   var name = document.getElementById('rname').value.trim();
   var txt  = document.getElementById('rtxt').value.trim();
   document.getElementById('rratingInput').value = chosenRating;
+  document.getElementById('rlangInput').value = currentLang;
   // send to Puto (Netlify Forms) — published after his validation
   try{ submitNetlify(form); }catch(err){}
   form.reset();
