@@ -678,19 +678,38 @@ document.getElementById('reviewFormEl').addEventListener('submit', function(e){
   e.preventDefault();
   if(chosenRating===0){ alert(I18N[currentLang].rate_alert); return; }
   var form = e.target;
+  var btn = form.querySelector('button[type=submit]');
   var name = document.getElementById('rname').value.trim();
   var txt  = document.getElementById('rtxt').value.trim();
+  var hpEl = document.querySelector('#reviewFormEl [name="bot-field"]');
+  var hp = hpEl ? hpEl.value : '';
+  var msg = document.getElementById('reviewMsg');
   document.getElementById('rratingInput').value = chosenRating;
   document.getElementById('rlangInput').value = currentLang;
-  // send to Puto (Netlify Forms) — published after his validation
+  btn.disabled = true;
+  msg.hidden = true; msg.classList.remove('err');
+  // 1) add the review to /admin (pending) — reliable direct function
+  fetch('/.netlify/functions/add-review', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({ name:name, txt:txt, rating:chosenRating, lang:currentLang, hp:hp })
+  }).then(function(r){ return r.json().catch(function(){ return {ok:r.ok}; }); })
+    .then(function(res){
+      btn.disabled = false;
+      if(res && res.ok){
+        form.reset(); chosenRating=0;
+        document.querySelectorAll('#reviewStars .star').forEach(function(s){s.classList.remove('on');});
+        msg.textContent = I18N[currentLang].review_ok; msg.hidden = false;
+        document.getElementById('reviews').scrollIntoView({behavior:'smooth',block:'start'});
+        setTimeout(function(){ msg.hidden = true; }, 5000);
+      } else {
+        msg.classList.add('err'); msg.textContent = I18N[currentLang].book_err; msg.hidden = false;
+      }
+    }).catch(function(){
+      btn.disabled = false;
+      msg.classList.add('err'); msg.textContent = I18N[currentLang].book_err; msg.hidden = false;
+    });
+  // 2) also notify Puto by email (best effort, via Netlify Forms)
   try{ submitNetlify(form); }catch(err){}
-  form.reset();
-  chosenRating=0;
-  document.querySelectorAll('#reviewStars .star').forEach(function(s){s.classList.remove('on');});
-  var msg = document.getElementById('reviewMsg');
-  msg.textContent = I18N[currentLang].review_ok; msg.hidden = false;
-  document.getElementById('reviews').scrollIntoView({behavior:'smooth',block:'start'});
-  setTimeout(function(){ msg.hidden = true; }, 4000);
 });
 
 /* ---------- init language ---------- */
