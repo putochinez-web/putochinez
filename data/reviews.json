@@ -1,7 +1,33 @@
 {
   "reviews": [
-    { "name": "Marina", "rating": 5, "lang": "fr", "date": "2026-08-02", "txt": "Les meilleurs cours privés que j'ai suivis. Puto décortique chaque détail et ma Kizomba a complètement changé en quelques séances." },
-    { "name": "Sofia", "rating": 5, "lang": "en", "date": "2026-08-05", "txt": "A true reference for Semba. The musicality work is on another level. Highly recommend." },
-    { "name": "João", "rating": 5, "lang": "pt", "date": "2026-08-07", "txt": "Aulas incríveis. O Puto ensina a verdadeira essência do Semba, com muita paciência e energia. Recomendo demais!" }
+    {
+      "name": "TEST-Circuit",
+      "rating": 5,
+      "lang": "fr",
+      "date": "2026-08-08",
+      "txt": "Avis de test automatique — a supprimer apres verif.",
+      "published": false
+    },
+    {
+      "name": "Marina",
+      "rating": 5,
+      "lang": "fr",
+      "date": "2026-08-02",
+      "txt": "Les meilleurs cours privés que j'ai suivis. Puto décortique chaque détail et ma Kizomba a complètement changé en quelques séances."
+    },
+    {
+      "name": "Sofia",
+      "rating": 5,
+      "lang": "en",
+      "date": "2026-08-05",
+      "txt": "A true reference for Semba. The musicality work is on another level. Highly recommend."
+    },
+    {
+      "name": "João",
+      "rating": 5,
+      "lang": "pt",
+      "date": "2026-08-07",
+      "txt": "Aulas incríveis. O Puto ensina a verdadeira essência do Semba, com muita paciência e energia. Recomendo demais!"
+    }
   ]
 }
