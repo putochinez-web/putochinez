@@ -1,14 +1,6 @@
 {
   "reviews": [
     {
-      "name": "TEST-Circuit",
-      "rating": 5,
-      "lang": "fr",
-      "date": "2026-08-08",
-      "txt": "Avis de test automatique — a supprimer apres verif.",
-      "published": false
-    },
-    {
       "name": "Marina",
       "rating": 5,
       "lang": "fr",
@@ -17,7 +9,7 @@
       "published": true
     },
     {
-      "name": "Sofia",
+      "name": "Yvan",
       "rating": 5,
       "lang": "en",
       "date": "2026-08-05",
