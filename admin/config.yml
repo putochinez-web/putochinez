@@ -1,0 +1,50 @@
+# ===========================================================================
+#  Configuration du panneau d'admin visuel (Decap CMS) — Puto Chinez
+# ---------------------------------------------------------------------------
+#  ⚠️  UNE SEULE CHOSE À MODIFIER : remplace "TON-UTILISATEUR/TON-DEPOT"
+#      ci-dessous par ton dépôt GitHub réel (ex: putochinez/site).
+# ===========================================================================
+
+backend:
+  name: github
+  repo: putochinez-web/putochinez   # ton dépôt GitHub
+  branch: main
+
+# Dossier pour d'éventuelles images ajoutées depuis le panneau
+media_folder: "images"
+public_folder: "/images"
+
+# Langue de l'interface du panneau
+locale: "fr"
+
+collections:
+  # -------------------------------------------------------------------------
+  #  AVIS  →  ajoute / modifie / supprime des avis avec un formulaire
+  # -------------------------------------------------------------------------
+  - name: "avis"
+    label: "⭐ Avis"
+    files:
+      - name: "reviews"
+        label: "Liste des avis"
+        file: "data/reviews.json"
+        description: "Ajoute, modifie ou supprime des avis. Chaque enregistrement met le site à jour."
+        fields:
+          - label: "Avis"
+            name: "reviews"
+            widget: "list"
+            label_singular: "un avis"
+            summary: "{{fields.name}} — {{fields.rating}}★ ({{fields.date}})"
+            fields:
+              - { label: "Nom", name: "name", widget: "string" }
+              - { label: "Note (1 à 5)", name: "rating", widget: "number", value_type: "int", min: 1, max: 5, default: 5 }
+              - label: "Langue de l'avis"
+                name: "lang"
+                widget: "select"
+                options:
+                  - { label: "Français", value: "fr" }
+                  - { label: "Anglais", value: "en" }
+                  - { label: "Portugais", value: "pt" }
+                  - { label: "Espagnol", value: "es" }
+                default: "fr"
+              - { label: "Date", name: "date", widget: "date", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+              - { label: "Texte de l'avis", name: "txt", widget: "text" }
