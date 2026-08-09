@@ -7,98 +7,19 @@
   "global_promo": {
     "active": false,
     "percent": 0,
-    "label": {
-      "fr": "",
-      "en": ""
-    }
+    "label": { "fr": "", "en": "" }
   },
   "codes": [
-    {
-      "code": "FIDELE10",
-      "percent": 10,
-      "active": false
-    }
+    { "code": "FIDELE10", "percent": 10, "active": false }
   ],
   "types": [
-    {
-      "label": {
-        "fr": "Solo — 2h",
-        "en": "Solo — 2h"
-      },
-      "price": 140,
-      "promo": 0,
-      "enabled": true
-    },
-    {
-      "label": {
-        "fr": "Solo — forfait 5h",
-        "en": "Solo — 5h pack"
-      },
-      "price": 275,
-      "promo": 0,
-      "enabled": true
-    },
-    {
-      "label": {
-        "fr": "Solo — forfait 10h",
-        "en": "Solo — 10h pack"
-      },
-      "price": 500,
-      "promo": 0,
-      "enabled": true
-    },
-    {
-      "label": {
-        "fr": "Couple — 2h",
-        "en": "Couple — 2h"
-      },
-      "price": 200,
-      "promo": 0,
-      "enabled": true
-    },
-    {
-      "label": {
-        "fr": "Couple — forfait 5h",
-        "en": "Couple — 5h pack"
-      },
-      "price": 400,
-      "promo": 0,
-      "enabled": true
-    },
-    {
-      "label": {
-        "fr": "Couple — forfait 10h",
-        "en": "Couple — 10h pack"
-      },
-      "price": 750,
-      "promo": 0,
-      "enabled": true
-    },
-    {
-      "label": {
-        "fr": "Mini-groupe (3–5 couples)",
-        "en": "Mini-group (3–5 couples)"
-      },
-      "price": 0,
-      "promo": 0,
-      "enabled": true
-    },
-    {
-      "label": {
-        "fr": "Je ne sais pas encore",
-        "en": "Not sure yet"
-      },
-      "price": 0,
-      "promo": 0,
-      "enabled": true
-    }
-  ],
-  "promo": {
-    "active": true,
-    "percent": 5,
-    "label": {
-      "fr": "Promotion d'été",
-      "en": "Summer special"
-    }
-  }
+    { "label": { "fr": "Solo — 2h", "en": "Solo — 2h" }, "price": 140, "promo": 0, "enabled": true },
+    { "label": { "fr": "Solo — forfait 5h", "en": "Solo — 5h pack" }, "price": 275, "promo": 0, "enabled": true },
+    { "label": { "fr": "Solo — forfait 10h", "en": "Solo — 10h pack" }, "price": 500, "promo": 0, "enabled": true },
+    { "label": { "fr": "Couple — 2h", "en": "Couple — 2h" }, "price": 200, "promo": 0, "enabled": true },
+    { "label": { "fr": "Couple — forfait 5h", "en": "Couple — 5h pack" }, "price": 400, "promo": 0, "enabled": true },
+    { "label": { "fr": "Couple — forfait 10h", "en": "Couple — 10h pack" }, "price": 750, "promo": 0, "enabled": true },
+    { "label": { "fr": "Mini-groupe (3–5 couples)", "en": "Mini-group (3–5 couples)" }, "price": 0, "promo": 0, "enabled": true },
+    { "label": { "fr": "Je ne sais pas encore", "en": "Not sure yet" }, "price": 0, "promo": 0, "enabled": true }
+  ]
 }

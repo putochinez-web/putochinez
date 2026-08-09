@@ -331,6 +331,7 @@
         </div>
         <input type="hidden" id="btotal" name="total" value="" />
         <input type="hidden" id="bpromo" name="promo" value="" />
+        <input type="hidden" id="blang" name="client_lang" value="fr" />
         <div class="field"><label data-i18n="promo_code_label">Promo code</label><input id="bcode" name="promo_code" type="text" data-i18n-ph="ph_code" placeholder="Optional" autocomplete="off" /></div>
         <p id="codeMsg" class="code-msg" hidden></p>
         <div id="totalBox" class="total-box" hidden>
@@ -698,6 +699,7 @@ function submitNetlify(form){
 document.getElementById('bookForm').addEventListener('submit', function(e){
   e.preventDefault();
   var form = e.target;
+  var lg=document.getElementById('blang'); if(lg) lg.value=currentLang;
   var btn = form.querySelector('button[type=submit]');
   var msg = document.getElementById('bookMsg');
   msg.hidden = true; msg.classList.remove('err');
