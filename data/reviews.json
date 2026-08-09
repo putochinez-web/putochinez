@@ -6,28 +6,31 @@
       "lang": "fr",
       "date": "2026-08-09",
       "txt": "Des années d expérience sur la \ntransmission de notions. Un œil expert pour vous accompagner en profondeur quel que soit votre niveau. Fait partie des meilleurs cours que jai pu prendre. Vous verrez forcément votre danse évoluer.",
-      "published": false
+      "published": true
     },
     {
       "name": "Marina",
       "rating": 5,
       "lang": "fr",
       "date": "2026-08-02",
-      "txt": "Les meilleurs cours privés que j'ai suivis. Puto décortique chaque détail et ma Kizomba a complètement changé en quelques séances."
+      "txt": "Les meilleurs cours privés que j'ai suivis. Puto décortique chaque détail et ma Kizomba a complètement changé en quelques séances.",
+      "published": true
     },
     {
       "name": "Sofia",
       "rating": 5,
       "lang": "en",
       "date": "2026-08-05",
-      "txt": "A true reference for Semba. The musicality work is on another level. Highly recommend."
+      "txt": "A true reference for Semba. The musicality work is on another level. Highly recommend.",
+      "published": true
     },
     {
       "name": "João",
       "rating": 5,
       "lang": "pt",
       "date": "2026-08-07",
-      "txt": "Aulas incríveis. O Puto ensina a verdadeira essência do Semba, com muita paciência e energia. Recomendo demais!"
+      "txt": "Aulas incríveis. O Puto ensina a verdadeira essência do Semba, com muita paciência e energia. Recomendo demais!",
+      "published": true
     }
   ]
 }
