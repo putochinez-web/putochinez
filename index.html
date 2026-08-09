@@ -156,6 +156,10 @@
   .total-box .tb-strike{font-family:"Inter",sans-serif;font-weight:500;font-size:.95rem;color:var(--muted);text-decoration:line-through;}
   .price-note-line{font-size:.82rem;color:var(--muted);text-align:center;margin:8px 0 0;}
   .promo-badge{display:inline-block;background:var(--gold);color:#fff;font-family:"Inter",sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.04em;padding:3px 8px;border-radius:6px;margin-left:2px;vertical-align:middle;}
+  .promo-badge.code{background:var(--espresso);}
+  .code-msg{font-size:.82rem;margin:-4px 0 0;font-weight:600;}
+  .code-msg.ok{color:#1E7A44;}
+  .code-msg.err{color:#B23A1E;}
   .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
   .form-msg{margin-top:14px;padding:14px 16px;border-radius:12px;text-align:center;font-weight:600;font-size:.98rem;background:#EAF7EE;color:#1E7A44;border:1px solid #BCE4CB;}
   .form-msg.err{background:#FCEDE9;color:#B23A1E;border-color:#F1C9BD;}
@@ -327,6 +331,8 @@
         </div>
         <input type="hidden" id="btotal" name="total" value="" />
         <input type="hidden" id="bpromo" name="promo" value="" />
+        <div class="field"><label data-i18n="promo_code_label">Promo code</label><input id="bcode" name="promo_code" type="text" data-i18n-ph="ph_code" placeholder="Optional" autocomplete="off" /></div>
+        <p id="codeMsg" class="code-msg" hidden></p>
         <div id="totalBox" class="total-box" hidden>
           <span class="tb-label" data-i18n="total_label">Estimated total</span>
           <span class="tb-amount"><span id="tbStrike" class="tb-strike"></span><span id="tbValue">—</span></span>
@@ -428,7 +434,7 @@ var I18N = {
     chip_hint:"Tap a date, fill in the form, and I'll get back to you to lock it in.",
     f_name:"Your name", f_email:"Your email", f_type:"Class type", f_date:"Preferred date",
     f_msg:"Message (level, goals, style…)", f_send:"Send booking request ✉",
-    f_qty:"Quantity", total_label:"Estimated total", on_request:"Price on request", book_ok:"Thank you! Your request has been sent. I'll get back to you very soon ✨", book_err:"Oops, sending failed. Please reach me directly via Instagram DM or email just below.", review_ok:"Thank you! Your review has been sent and will be published after a quick check.",
+    f_qty:"Quantity", total_label:"Estimated total", on_request:"Price on request", promo_code_label:"Promo code", ph_code:"Optional", code_ok:"Code applied:", code_bad:"Invalid code", book_ok:"Thank you! Your request has been sent. I'll get back to you very soon ✨", book_err:"Oops, sending failed. Please reach me directly via Instagram DM or email just below.", review_ok:"Thank you! Your review has been sent and will be published after a quick check.",
     opt_solo1:"Solo — 1h", opt_solo5:"Solo — 5h pack", opt_solo10:"Solo — 10h pack",
     opt_cpl1:"Couple — 1h", opt_cpl5:"Couple — 5h pack", opt_cpl10:"Couple — 10h pack",
     opt_group:"Mini-group (3–5 couples)", opt_unsure:"Not sure yet",
@@ -476,7 +482,7 @@ var I18N = {
     chip_hint:"Cliquez sur une date, remplissez le formulaire, et je reviens vers vous pour la valider.",
     f_name:"Votre nom", f_email:"Votre email", f_type:"Type de cours", f_date:"Date souhaitée",
     f_msg:"Message (niveau, objectifs, style…)", f_send:"Envoyer ma demande ✉",
-    f_qty:"Quantité", total_label:"Total indicatif", on_request:"Prix sur demande", book_ok:"Merci ! Votre demande a bien été envoyée. Je reviens vers vous très vite ✨", book_err:"Oups, l'envoi n'a pas fonctionné. Écrivez-moi directement en DM Instagram ou par email juste en dessous.", review_ok:"Merci ! Votre avis a été envoyé et sera publié après validation.",
+    f_qty:"Quantité", total_label:"Total indicatif", on_request:"Prix sur demande", promo_code_label:"Code promo", ph_code:"Facultatif", code_ok:"Code appliqué :", code_bad:"Code invalide", book_ok:"Merci ! Votre demande a bien été envoyée. Je reviens vers vous très vite ✨", book_err:"Oups, l'envoi n'a pas fonctionné. Écrivez-moi directement en DM Instagram ou par email juste en dessous.", review_ok:"Merci ! Votre avis a été envoyé et sera publié après validation.",
     opt_solo1:"Solo — 1h", opt_solo5:"Solo — forfait 5h", opt_solo10:"Solo — forfait 10h",
     opt_cpl1:"Couple — 1h", opt_cpl5:"Couple — forfait 5h", opt_cpl10:"Couple — forfait 10h",
     opt_group:"Mini-groupe (3–5 couples)", opt_unsure:"Je ne sais pas encore",
@@ -549,16 +555,17 @@ document.querySelectorAll('#langSwitch button').forEach(function(b){
 var PRICING = {
   currency:"€",
   note:{ fr:"Minimum 2h par cours · prix indicatif · paiement sur place", en:"Minimum 2h per class · indicative price · payment on site" },
-  promo:{ active:false, percent:0, label:{fr:"",en:""} },
+  global_promo:{ active:false, percent:0, label:{fr:"",en:""} },
+  codes:[ { code:"FIDELE10", percent:10, active:false } ],
   types:[
-    { label:{fr:"Solo — 2h",en:"Solo — 2h"}, price:140, enabled:true },
-    { label:{fr:"Solo — forfait 5h",en:"Solo — 5h pack"}, price:275, enabled:true },
-    { label:{fr:"Solo — forfait 10h",en:"Solo — 10h pack"}, price:500, enabled:true },
-    { label:{fr:"Couple — 2h",en:"Couple — 2h"}, price:200, enabled:true },
-    { label:{fr:"Couple — forfait 5h",en:"Couple — 5h pack"}, price:400, enabled:true },
-    { label:{fr:"Couple — forfait 10h",en:"Couple — 10h pack"}, price:750, enabled:true },
-    { label:{fr:"Mini-groupe (3–5 couples)",en:"Mini-group (3–5 couples)"}, price:0, enabled:true },
-    { label:{fr:"Je ne sais pas encore",en:"Not sure yet"}, price:0, enabled:true }
+    { label:{fr:"Solo — 2h",en:"Solo — 2h"}, price:140, promo:0, enabled:true },
+    { label:{fr:"Solo — forfait 5h",en:"Solo — 5h pack"}, price:275, promo:0, enabled:true },
+    { label:{fr:"Solo — forfait 10h",en:"Solo — 10h pack"}, price:500, promo:0, enabled:true },
+    { label:{fr:"Couple — 2h",en:"Couple — 2h"}, price:200, promo:0, enabled:true },
+    { label:{fr:"Couple — forfait 5h",en:"Couple — 5h pack"}, price:400, promo:0, enabled:true },
+    { label:{fr:"Couple — forfait 10h",en:"Couple — 10h pack"}, price:750, promo:0, enabled:true },
+    { label:{fr:"Mini-groupe (3–5 couples)",en:"Mini-group (3–5 couples)"}, price:0, promo:0, enabled:true },
+    { label:{fr:"Je ne sais pas encore",en:"Not sure yet"}, price:0, promo:0, enabled:true }
   ]
 };
 function buildPricing(lang){
@@ -572,6 +579,7 @@ function buildPricing(lang){
     var lab=(t.label && (t.label[lang]||t.label.fr||t.label.en)) || '';
     o.textContent=lab; o.value=lab;
     o.dataset.price = (typeof t.price==='number') ? t.price : 0;
+    o.dataset.promo = (typeof t.promo==='number') ? t.promo : 0;
     sel.appendChild(o);
   });
   if(current){ for(var i=0;i<sel.options.length;i++){ if(sel.options[i].value===current){ sel.selectedIndex=i; break; } } }
@@ -584,31 +592,56 @@ function recalcTotal(){
   if(!sel||!box) return;
   var opt=sel.options[sel.selectedIndex];
   var price=opt?parseFloat(opt.dataset.price||'0'):0;
+  var typePromo=opt?parseFloat(opt.dataset.promo||'0'):0;
   var qty=parseInt(document.getElementById('bqty').value,10); if(!qty||qty<1)qty=1;
   var cur=PRICING.currency||'€';
   var vEl=document.getElementById('tbValue'), sEl=document.getElementById('tbStrike');
   var totalHidden=document.getElementById('btotal'), promoHidden=document.getElementById('bpromo');
+  var codeMsg=document.getElementById('codeMsg');
   if(!price || price<=0){
     box.hidden=false; sEl.textContent=''; vEl.textContent=I18N[currentLang].on_request;
+    if(codeMsg) codeMsg.hidden=true;
     totalHidden.value=I18N[currentLang].on_request; promoHidden.value=''; return;
   }
-  var subtotal=price*qty, total=subtotal, promoTxt='';
-  var promo=PRICING.promo;
-  if(promo && promo.active && promo.percent>0){
-    total=Math.round(subtotal*(1-promo.percent/100));
-    sEl.textContent=subtotal+' '+cur;
-    var plab=(promo.label && (promo.label[currentLang]||promo.label.fr||promo.label.en))||'';
-    promoTxt=(plab?plab+' ':'')+'−'+promo.percent+'%';
-  } else { sEl.textContent=''; }
+  var subtotal=price*qty;
+  var g=PRICING.global_promo;
+  var globalActive = g && g.active && g.percent>0;
+  var baseDisc = globalActive ? g.percent : (typePromo>0?typePromo:0);
+  var baseLabel = globalActive ? ((g.label && (g.label[currentLang]||g.label.fr||g.label.en))||'') : '';
+  var afterBase = baseDisc>0 ? subtotal*(1-baseDisc/100) : subtotal;
+  // promo code (cumulative, on top of base discount)
+  var codeInput=document.getElementById('bcode');
+  var codeVal=codeInput?codeInput.value.trim().toUpperCase():'';
+  var codeDisc=0;
+  if(codeVal){
+    (PRICING.codes||[]).forEach(function(c){
+      if(c.active!==false && String(c.code||'').trim().toUpperCase()===codeVal){ codeDisc=c.percent||0; }
+    });
+  }
+  var afterCode = codeDisc>0 ? afterBase*(1-codeDisc/100) : afterBase;
+  var total=Math.round(afterCode);
+  var hasDiscount = baseDisc>0 || codeDisc>0;
+  sEl.textContent = hasDiscount ? (Math.round(subtotal)+' '+cur) : '';
+  var badges='';
+  if(baseDisc>0) badges += '<span class="promo-badge">'+(baseLabel?baseLabel+' ':'')+'−'+baseDisc+'%</span>';
+  if(codeDisc>0) badges += '<span class="promo-badge code">'+codeVal+' −'+codeDisc+'%</span>';
   box.hidden=false;
-  vEl.innerHTML = total+' '+cur + (promoTxt?' <span class="promo-badge">'+promoTxt+'</span>':'');
-  totalHidden.value = total+' '+cur + (promoTxt?' ('+promoTxt+')':'');
-  promoHidden.value = promoTxt;
+  vEl.innerHTML = total+' '+cur + (badges?' '+badges:'');
+  // code feedback
+  if(codeMsg){
+    if(codeVal){ codeMsg.hidden=false;
+      if(codeDisc>0){ codeMsg.className='code-msg ok'; codeMsg.textContent=I18N[currentLang].code_ok+' −'+codeDisc+'%'; }
+      else { codeMsg.className='code-msg err'; codeMsg.textContent=I18N[currentLang].code_bad; }
+    } else { codeMsg.hidden=true; }
+  }
+  totalHidden.value = total+' '+cur + (hasDiscount?' (promo)':'');
+  promoHidden.value = (baseDisc>0?('base -'+baseDisc+'%'):'') + (codeDisc>0?(' | code '+codeVal+' -'+codeDisc+'%'):'');
 }
 (function(){
-  var t=document.getElementById('btype'), q=document.getElementById('bqty');
+  var t=document.getElementById('btype'), q=document.getElementById('bqty'), c=document.getElementById('bcode');
   if(t) t.addEventListener('change', recalcTotal);
   if(q) q.addEventListener('input', recalcTotal);
+  if(c) c.addEventListener('input', recalcTotal);
 })();
 
 /* ---------- upcoming date chips ---------- */

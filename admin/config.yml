@@ -36,23 +36,33 @@ collections:
             fields:
               - { label: "Français", name: "fr", widget: "string" }
               - { label: "English", name: "en", widget: "string" }
-          - label: "Promotion"
-            name: "promo"
+          - label: "Promo GLOBALE (prioritaire — si active, ignore les promos par cours)"
+            name: "global_promo"
             widget: "object"
             fields:
-              - { label: "Promo active ?", name: "active", widget: "boolean", default: false }
+              - { label: "Active ?", name: "active", widget: "boolean", default: false }
               - { label: "Réduction (%)", name: "percent", widget: "number", value_type: "int", default: 0, min: 0, max: 100 }
-              - label: "Libellé de la promo (ex: Rentrée)"
+              - label: "Libellé (ex: Rentrée)"
                 name: "label"
                 widget: "object"
                 fields:
                   - { label: "Français", name: "fr", widget: "string", required: false }
                   - { label: "English", name: "en", widget: "string", required: false }
+          - label: "Codes promo (pour tes fidèles — cumulatif avec la promo de base)"
+            name: "codes"
+            widget: "list"
+            label_singular: "un code"
+            required: false
+            summary: "{{fields.code}} — {{fields.percent}}% {{#if fields.active}}(actif){{/if}}"
+            fields:
+              - { label: "Code (ex: FIDELE10)", name: "code", widget: "string" }
+              - { label: "Réduction (%)", name: "percent", widget: "number", value_type: "int", default: 10, min: 0, max: 100 }
+              - { label: "Actif ?", name: "active", widget: "boolean", default: true }
           - label: "Types de cours"
             name: "types"
             widget: "list"
             label_singular: "un type de cours"
-            summary: "{{fields.label.fr}} — {{fields.price}} €"
+            summary: "{{fields.label.fr}} — {{fields.price}} € {{#if fields.promo}}(−{{fields.promo}}%){{/if}}"
             fields:
               - label: "Nom du cours"
                 name: "label"
@@ -61,6 +71,7 @@ collections:
                   - { label: "Français", name: "fr", widget: "string" }
                   - { label: "English", name: "en", widget: "string" }
               - { label: "Prix (€) — 0 = sur demande", name: "price", widget: "number", value_type: "int", default: 0 }
+              - { label: "Promo sur ce cours (%) — 0 = aucune", name: "promo", widget: "number", value_type: "int", default: 0, min: 0, max: 100 }
               - { label: "Visible sur le site ?", name: "enabled", widget: "boolean", default: true }
 
   # -------------------------------------------------------------------------
