@@ -150,6 +150,12 @@
   }
   .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(168,114,26,.14);}
   .field textarea{resize:vertical;min-height:88px;}
+  .total-box{display:flex;align-items:center;justify-content:space-between;gap:10px;background:linear-gradient(180deg,#FBF3E2,#F6EAD1);border:1.5px solid var(--gold);border-radius:12px;padding:14px 18px;}
+  .total-box .tb-label{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);}
+  .total-box .tb-amount{font-family:"Anton",sans-serif;font-size:1.5rem;color:var(--gold);display:flex;align-items:baseline;gap:8px;}
+  .total-box .tb-strike{font-family:"Inter",sans-serif;font-weight:500;font-size:.95rem;color:var(--muted);text-decoration:line-through;}
+  .price-note-line{font-size:.82rem;color:var(--muted);text-align:center;margin:8px 0 0;}
+  .promo-badge{display:inline-block;background:var(--gold);color:#fff;font-family:"Inter",sans-serif;font-weight:600;font-size:.7rem;letter-spacing:.04em;padding:3px 8px;border-radius:6px;margin-left:2px;vertical-align:middle;}
   .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;}
   .form-msg{margin-top:14px;padding:14px 16px;border-radius:12px;text-align:center;font-weight:600;font-size:.98rem;background:#EAF7EE;color:#1E7A44;border:1px solid #BCE4CB;}
   .form-msg.err{background:#FCEDE9;color:#B23A1E;border-color:#F1C9BD;}
@@ -315,19 +321,17 @@
         <div class="two">
           <div class="field">
             <label data-i18n="f_type">Class type</label>
-            <select id="btype" name="class">
-              <option data-i18n="opt_solo1">Solo — 1h</option>
-              <option data-i18n="opt_solo5">Solo — 5h pack</option>
-              <option data-i18n="opt_solo10">Solo — 10h pack</option>
-              <option data-i18n="opt_cpl1">Couple — 1h</option>
-              <option data-i18n="opt_cpl5">Couple — 5h pack</option>
-              <option data-i18n="opt_cpl10">Couple — 10h pack</option>
-              <option data-i18n="opt_group">Mini-group (3–5 couples)</option>
-              <option data-i18n="opt_unsure">Not sure yet</option>
-            </select>
+            <select id="btype" name="class"></select>
           </div>
           <div class="field"><label data-i18n="f_qty">Quantity</label><input id="bqty" name="quantity" type="number" min="1" step="1" value="1" inputmode="numeric" /></div>
         </div>
+        <input type="hidden" id="btotal" name="total" value="" />
+        <input type="hidden" id="bpromo" name="promo" value="" />
+        <div id="totalBox" class="total-box" hidden>
+          <span class="tb-label" data-i18n="total_label">Estimated total</span>
+          <span class="tb-amount"><span id="tbStrike" class="tb-strike"></span><span id="tbValue">—</span></span>
+        </div>
+        <p id="priceNote" class="price-note-line"></p>
         <div class="field"><label data-i18n="f_date">Preferred date</label><input id="bdate" name="date" type="date" /></div>
         <div class="field"><label data-i18n="f_msg">Message (level, goals, style…)</label><textarea id="bmsg" name="message" data-i18n-ph="ph_msg" placeholder="e.g. Beginner couple, we'd love to work on Kizomba foundations."></textarea></div>
         <button type="submit" class="btn btn-gold" style="width:100%;" data-i18n="f_send">Send booking request ✉</button>
@@ -424,7 +428,7 @@ var I18N = {
     chip_hint:"Tap a date, fill in the form, and I'll get back to you to lock it in.",
     f_name:"Your name", f_email:"Your email", f_type:"Class type", f_date:"Preferred date",
     f_msg:"Message (level, goals, style…)", f_send:"Send booking request ✉",
-    f_qty:"Quantity", book_ok:"Thank you! Your request has been sent. I'll get back to you very soon ✨", book_err:"Oops, sending failed. Please reach me directly via Instagram DM or email just below.", review_ok:"Thank you! Your review has been sent and will be published after a quick check.",
+    f_qty:"Quantity", total_label:"Estimated total", on_request:"Price on request", book_ok:"Thank you! Your request has been sent. I'll get back to you very soon ✨", book_err:"Oops, sending failed. Please reach me directly via Instagram DM or email just below.", review_ok:"Thank you! Your review has been sent and will be published after a quick check.",
     opt_solo1:"Solo — 1h", opt_solo5:"Solo — 5h pack", opt_solo10:"Solo — 10h pack",
     opt_cpl1:"Couple — 1h", opt_cpl5:"Couple — 5h pack", opt_cpl10:"Couple — 10h pack",
     opt_group:"Mini-group (3–5 couples)", opt_unsure:"Not sure yet",
@@ -472,7 +476,7 @@ var I18N = {
     chip_hint:"Cliquez sur une date, remplissez le formulaire, et je reviens vers vous pour la valider.",
     f_name:"Votre nom", f_email:"Votre email", f_type:"Type de cours", f_date:"Date souhaitée",
     f_msg:"Message (niveau, objectifs, style…)", f_send:"Envoyer ma demande ✉",
-    f_qty:"Quantité", book_ok:"Merci ! Votre demande a bien été envoyée. Je reviens vers vous très vite ✨", book_err:"Oups, l'envoi n'a pas fonctionné. Écrivez-moi directement en DM Instagram ou par email juste en dessous.", review_ok:"Merci ! Votre avis a été envoyé et sera publié après validation.",
+    f_qty:"Quantité", total_label:"Total indicatif", on_request:"Prix sur demande", book_ok:"Merci ! Votre demande a bien été envoyée. Je reviens vers vous très vite ✨", book_err:"Oups, l'envoi n'a pas fonctionné. Écrivez-moi directement en DM Instagram ou par email juste en dessous.", review_ok:"Merci ! Votre avis a été envoyé et sera publié après validation.",
     opt_solo1:"Solo — 1h", opt_solo5:"Solo — forfait 5h", opt_solo10:"Solo — forfait 10h",
     opt_cpl1:"Couple — 1h", opt_cpl5:"Couple — forfait 5h", opt_cpl10:"Couple — forfait 10h",
     opt_group:"Mini-groupe (3–5 couples)", opt_unsure:"Je ne sais pas encore",
@@ -522,6 +526,7 @@ function applyLang(lang){
     b.classList.toggle('active', b.getAttribute('data-lang')===lang);
   });
   buildChips(lang);
+  buildPricing(lang);
   renderReviews();
   try{ localStorage.setItem('pc_lang', lang); }catch(e){}
 }
@@ -538,6 +543,72 @@ document.querySelectorAll('#langSwitch button').forEach(function(b){
     ents.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
   },{threshold:.12});
   els.forEach(function(e){io.observe(e);});
+})();
+
+/* ---------- pricing (editable in /admin) + live total ---------- */
+var PRICING = {
+  currency:"€",
+  note:{ fr:"Minimum 2h par cours · prix indicatif · paiement sur place", en:"Minimum 2h per class · indicative price · payment on site" },
+  promo:{ active:false, percent:0, label:{fr:"",en:""} },
+  types:[
+    { label:{fr:"Solo — 2h",en:"Solo — 2h"}, price:140, enabled:true },
+    { label:{fr:"Solo — forfait 5h",en:"Solo — 5h pack"}, price:275, enabled:true },
+    { label:{fr:"Solo — forfait 10h",en:"Solo — 10h pack"}, price:500, enabled:true },
+    { label:{fr:"Couple — 2h",en:"Couple — 2h"}, price:200, enabled:true },
+    { label:{fr:"Couple — forfait 5h",en:"Couple — 5h pack"}, price:400, enabled:true },
+    { label:{fr:"Couple — forfait 10h",en:"Couple — 10h pack"}, price:750, enabled:true },
+    { label:{fr:"Mini-groupe (3–5 couples)",en:"Mini-group (3–5 couples)"}, price:0, enabled:true },
+    { label:{fr:"Je ne sais pas encore",en:"Not sure yet"}, price:0, enabled:true }
+  ]
+};
+function buildPricing(lang){
+  var sel = document.getElementById('btype');
+  if(!sel) return;
+  var current = sel.value;
+  sel.innerHTML='';
+  (PRICING.types||[]).forEach(function(t){
+    if(t.enabled===false) return;
+    var o=document.createElement('option');
+    var lab=(t.label && (t.label[lang]||t.label.fr||t.label.en)) || '';
+    o.textContent=lab; o.value=lab;
+    o.dataset.price = (typeof t.price==='number') ? t.price : 0;
+    sel.appendChild(o);
+  });
+  if(current){ for(var i=0;i<sel.options.length;i++){ if(sel.options[i].value===current){ sel.selectedIndex=i; break; } } }
+  var note=document.getElementById('priceNote');
+  if(note && PRICING.note){ note.textContent = PRICING.note[lang]||PRICING.note.fr||''; }
+  recalcTotal();
+}
+function recalcTotal(){
+  var sel=document.getElementById('btype'), box=document.getElementById('totalBox');
+  if(!sel||!box) return;
+  var opt=sel.options[sel.selectedIndex];
+  var price=opt?parseFloat(opt.dataset.price||'0'):0;
+  var qty=parseInt(document.getElementById('bqty').value,10); if(!qty||qty<1)qty=1;
+  var cur=PRICING.currency||'€';
+  var vEl=document.getElementById('tbValue'), sEl=document.getElementById('tbStrike');
+  var totalHidden=document.getElementById('btotal'), promoHidden=document.getElementById('bpromo');
+  if(!price || price<=0){
+    box.hidden=false; sEl.textContent=''; vEl.textContent=I18N[currentLang].on_request;
+    totalHidden.value=I18N[currentLang].on_request; promoHidden.value=''; return;
+  }
+  var subtotal=price*qty, total=subtotal, promoTxt='';
+  var promo=PRICING.promo;
+  if(promo && promo.active && promo.percent>0){
+    total=Math.round(subtotal*(1-promo.percent/100));
+    sEl.textContent=subtotal+' '+cur;
+    var plab=(promo.label && (promo.label[currentLang]||promo.label.fr||promo.label.en))||'';
+    promoTxt=(plab?plab+' ':'')+'−'+promo.percent+'%';
+  } else { sEl.textContent=''; }
+  box.hidden=false;
+  vEl.innerHTML = total+' '+cur + (promoTxt?' <span class="promo-badge">'+promoTxt+'</span>':'');
+  totalHidden.value = total+' '+cur + (promoTxt?' ('+promoTxt+')':'');
+  promoHidden.value = promoTxt;
+}
+(function(){
+  var t=document.getElementById('btype'), q=document.getElementById('bqty');
+  if(t) t.addEventListener('change', recalcTotal);
+  if(q) q.addEventListener('input', recalcTotal);
 })();
 
 /* ---------- upcoming date chips ---------- */
@@ -718,6 +789,16 @@ document.getElementById('reviewFormEl').addEventListener('submit', function(e){
   var saved=null; try{ saved = localStorage.getItem('pc_lang'); }catch(e){}
   var lang = saved || ((navigator.language||'en').toLowerCase().indexOf('fr')===0 ? 'fr' : 'en');
   applyLang(lang);
+})();
+
+/* ---------- load editable pricing from the CMS data file ---------- */
+(function(){
+  fetch('/data/pricing.json', {cache:'no-store'})
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      if(d && Array.isArray(d.types)){ PRICING = d; buildPricing(currentLang); }
+    })
+    .catch(function(){ /* keep default pricing */ });
 })();
 
 /* ---------- load editable content (Bio / Description) from the CMS data file ---------- */

@@ -19,6 +19,51 @@ locale: "fr"
 
 collections:
   # -------------------------------------------------------------------------
+  #  TARIFS  →  types de cours, prix, promo (min 2h = ne propose que du 2h+)
+  # -------------------------------------------------------------------------
+  - name: "tarifs"
+    label: "💶 Tarifs & Promo"
+    files:
+      - name: "pricing"
+        label: "Tarifs & Promo"
+        file: "data/pricing.json"
+        description: "Gère tes cours et leurs prix. Le site calcule le total = prix × quantité. Mets 0 comme prix pour afficher « Prix sur demande »."
+        fields:
+          - { label: "Devise", name: "currency", widget: "string", default: "€" }
+          - label: "Note affichée sous le total"
+            name: "note"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "string" }
+              - { label: "English", name: "en", widget: "string" }
+          - label: "Promotion"
+            name: "promo"
+            widget: "object"
+            fields:
+              - { label: "Promo active ?", name: "active", widget: "boolean", default: false }
+              - { label: "Réduction (%)", name: "percent", widget: "number", value_type: "int", default: 0, min: 0, max: 100 }
+              - label: "Libellé de la promo (ex: Rentrée)"
+                name: "label"
+                widget: "object"
+                fields:
+                  - { label: "Français", name: "fr", widget: "string", required: false }
+                  - { label: "English", name: "en", widget: "string", required: false }
+          - label: "Types de cours"
+            name: "types"
+            widget: "list"
+            label_singular: "un type de cours"
+            summary: "{{fields.label.fr}} — {{fields.price}} €"
+            fields:
+              - label: "Nom du cours"
+                name: "label"
+                widget: "object"
+                fields:
+                  - { label: "Français", name: "fr", widget: "string" }
+                  - { label: "English", name: "en", widget: "string" }
+              - { label: "Prix (€) — 0 = sur demande", name: "price", widget: "number", value_type: "int", default: 0 }
+              - { label: "Visible sur le site ?", name: "enabled", widget: "boolean", default: true }
+
+  # -------------------------------------------------------------------------
   #  CONTENU  →  modifie la Description et la Bio (FR + EN)
   # -------------------------------------------------------------------------
   - name: "contenu"
