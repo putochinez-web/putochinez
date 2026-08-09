@@ -102,7 +102,7 @@
     background:linear-gradient(to top,rgba(15,10,6,.82),transparent);
     color:#F3E9D6;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;text-align:center;font-weight:600;
   }
-  .pillars{margin:22px 0 4px;font-size:clamp(.72rem,3.6vw,.95rem);letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--ink-soft);}
+  .pillars{margin:22px 0 4px;font-size:clamp(.72rem,3.6vw,.95rem);letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--ink-soft);white-space:nowrap;}
   .pillars b{color:var(--gold);font-weight:700;}
   .loc{font-family:"Anton",sans-serif;font-size:clamp(1.5rem,7vw,2.3rem);text-transform:uppercase;margin:2px 0 22px;display:flex;align-items:center;justify-content:center;gap:.15em;}
   .loc .pin-ico{width:.82em;height:.82em;vertical-align:baseline;}
@@ -129,7 +129,7 @@
 
   .bio-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px 26px;box-shadow:var(--shadow);}
   .awards{display:flex;flex-direction:column;gap:2px;font-size:1.06rem;}
-  .awards .big{font-family:"Inter",sans-serif;font-weight:600;font-size:clamp(.9rem,3vw,1.05rem);text-transform:uppercase;letter-spacing:.06em;line-height:1.35;margin-bottom:10px;color:var(--ink-soft);}
+  .awards .big{font-family:"Inter",sans-serif;font-weight:600;font-size:clamp(.98rem,3.1vw,1.12rem);letter-spacing:.01em;line-height:1.35;margin-bottom:10px;color:var(--ink-soft);}
   .awards .row{color:var(--ink-soft);}
   .awards .row b{color:var(--ink);}
   .bio-detail p{color:var(--ink-soft);margin:0 0 14px;}
@@ -206,9 +206,7 @@
     .direct{flex-direction:column;}
     .direct .btn{min-width:0;width:100%;}
     .float-book{display:flex;}
-    .pillars{font-size:.8rem;letter-spacing:.1em;}
-    .pillars .pil-last{display:block;margin-top:3px;}
-    .pillars .pil-dot{display:none;}
+    .pillars{font-size:min(3.6vw,14px);letter-spacing:.03em;}
     footer{padding-bottom:96px;}
     .hero{padding-top:70px;}
   }
@@ -403,7 +401,7 @@ var I18N = {
     hero_script:"Private", hero_big:"Classes",
     enhance:"Enhance your dance",
     modes:"Solo &nbsp;|&nbsp; Couple or small group",
-    pillars:"Foundations <b>•</b> Technique <span class=\"pil-last\"><b class=\"pil-dot\">•</b> Musicality</span>",
+    pillars:"Foundations <b>•</b> Technique <b>•</b> Musicality",
     cta_book:"Book your session →",
     classes_title:"The classes",
     classes_lead:"17+ years of experience in Kizomba &amp; Semba. Whether you're a beginner or an experienced dancer, each class is tailored to your goals. Build solid foundations, improve your technique, musicality, connection, and confidence on the dance floor.",
@@ -411,7 +409,7 @@ var I18N = {
     p2_k:"Technique", p2_v:"Lead, follow, posture and clean movement.",
     p3_k:"Musicality", p3_v:"Feel the music, connect, dance with confidence.",
     bio_title:"Biography",
-    bio_champ:"Africadançar Kizomba Champion",
+    bio_champ:"Africadançar Kizomba Champion 2011",
     bio_medals:"🥇 France · 🥈 World",
     bio_penatchon:"Co-Founder of Penatchon Dance School",
     bio_flores:"Founder of Flores do Semba Dance School",
@@ -451,7 +449,7 @@ var I18N = {
     hero_script:"Cours", hero_big:"Privés",
     enhance:"Sublimez votre danse",
     modes:"Solo &nbsp;|&nbsp; Couple ou petit groupe",
-    pillars:"Fondations <b>•</b> Technique <span class=\"pil-last\"><b class=\"pil-dot\">•</b> Musicalité</span>",
+    pillars:"Fondations <b>•</b> Technique <b>•</b> Musicalité",
     cta_book:"Réserver un cours →",
     classes_title:"Les cours",
     classes_lead:"Plus de 17 ans d'expérience en Kizomba &amp; Semba. Que vous soyez débutant ou danseur confirmé, chaque cours est adapté à vos objectifs. Construisez des bases solides, améliorez votre technique, votre musicalité, votre connexion et votre confiance sur la piste.",
@@ -459,7 +457,7 @@ var I18N = {
     p2_k:"Technique", p2_v:"Guidage, suivi, posture et mouvement propre.",
     p3_k:"Musicalité", p3_v:"Ressentez la musique, connectez, dansez avec confiance.",
     bio_title:"Biographie",
-    bio_champ:"Champion Africadançar Kizomba",
+    bio_champ:"Champion Africadançar Kizomba 2011",
     bio_medals:"🥇 France · 🥈 Monde",
     bio_penatchon:"Co-fondateur de l'école de danse Penatchon",
     bio_flores:"Fondateur de l'école de danse Flores do Semba",
