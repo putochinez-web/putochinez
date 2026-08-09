@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>Composer une confirmation — Puto Chinez</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{--bg:#F5EFE3;--card:#FCFAF4;--ink:#231810;--ink-soft:#4A3B2D;--muted:#7A6A57;--line:#E2D6BF;--gold:#A8721A;--espresso:#241811;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Inter",system-ui,sans-serif;line-height:1.55;}
+  .wrap{max-width:720px;margin:0 auto;padding:22px 18px 60px;}
+  h1{font-family:"Anton",sans-serif;text-transform:uppercase;font-size:1.5rem;letter-spacing:.02em;margin:.2em 0 .1em;}
+  .sub{color:var(--muted);font-size:.9rem;margin-bottom:18px;}
+  .langbar{display:flex;gap:6px;justify-content:flex-end;margin-bottom:10px;}
+  .langbar button{border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;font-weight:700;font-size:.8rem;cursor:pointer;color:var(--ink-soft);}
+  .langbar button.active{background:var(--gold);color:#fff;border-color:var(--gold);}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 18px;box-shadow:0 14px 40px -22px rgba(45,30,15,.4);margin-bottom:18px;}
+  label{display:block;font-size:.78rem;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-soft);margin:12px 0 5px;}
+  input,textarea{width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:10px;font-family:inherit;font-size:1rem;background:#fff;color:var(--ink);}
+  input:focus,textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(168,114,26,.14);}
+  textarea{resize:vertical;min-height:64px;}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .presets{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;}
+  .presets button{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:7px 13px;font-size:.85rem;font-weight:600;cursor:pointer;color:var(--ink-soft);}
+  .presets button:hover{border-color:var(--gold);color:var(--gold);}
+  .check{display:flex;align-items:center;gap:9px;margin-top:14px;font-size:.95rem;color:var(--ink-soft);}
+  .check input{width:auto;}
+  .preview{white-space:pre-wrap;background:#fff;border:1px dashed var(--line);border-radius:10px;padding:16px;font-size:.96rem;color:var(--ink-soft);}
+  .preview .subj{font-weight:700;color:var(--ink);margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid var(--line);}
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;}
+  .btn{flex:1;min-width:160px;border:none;border-radius:999px;padding:14px 18px;font-weight:700;font-size:1rem;cursor:pointer;text-align:center;text-decoration:none;display:inline-block;}
+  .btn-gold{background:linear-gradient(180deg,#C98F26,#A8721A);color:#fff;}
+  .btn-ghost{background:#fff;border:1.5px solid var(--gold);color:var(--gold);}
+  .hint{font-size:.82rem;color:var(--muted);margin-top:10px;}
+  @media(max-width:520px){.row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="langbar">
+    <button data-l="fr" class="active">🇫🇷 FR</button>
+    <button data-l="en">🇬🇧 EN</button>
+  </div>
+  <h1 id="t_title">Composer une confirmation</h1>
+  <div class="sub" id="t_sub">Remplis les infos, vérifie l'aperçu, puis ouvre l'email pré-rempli.</div>
+
+  <div class="card">
+    <div class="row">
+      <div><label id="l_name">Prénom du client</label><input id="c_name" placeholder="ex. Marina" /></div>
+      <div><label id="l_email">Email du client</label><input id="c_email" type="email" placeholder="client@email.com" /></div>
+    </div>
+    <label id="l_course">Type de cours</label>
+    <input id="c_course" placeholder="ex. Solo — 2h" />
+    <div class="row">
+      <div><label id="l_date">Date proposée</label><input id="c_date" type="date" /></div>
+      <div></div>
+    </div>
+    <div class="row">
+      <div><label id="l_start">Heure début</label><input id="c_start" type="time" /></div>
+      <div><label id="l_end">Heure fin</label><input id="c_end" type="time" /></div>
+    </div>
+    <label id="l_addr">Adresse / Lieu</label>
+    <textarea id="c_addr" placeholder="ex. Esplanade de la BNF – Métro 14"></textarea>
+    <div class="presets" id="presets"></div>
+    <label class="check"><input type="checkbox" id="c_studio" /> <span id="l_studio">Proposer aussi l'option « studio de danse à Paris, à votre charge »</span></label>
+  </div>
+
+  <div class="card">
+    <label id="l_preview">Aperçu de l'email</label>
+    <div class="preview"><div class="subj" id="pv_subj"></div><div id="pv_body"></div></div>
+    <div class="btns">
+      <a class="btn btn-gold" id="btn_send" href="#">✉ <span id="t_send">Ouvrir l'email</span></a>
+      <button class="btn btn-ghost" id="btn_copy"><span id="t_copy">Copier le texte</span></button>
+    </div>
+    <div class="hint" id="t_hint">L'email s'ouvre dans ta messagerie, déjà rempli et adressé au client. Tu n'as plus qu'à vérifier et envoyer.</div>
+  </div>
+</div>
+
+<script>
+var LANG='fr';
+var UI={
+  fr:{ title:"Composer une confirmation", sub:"Remplis les infos, vérifie l'aperçu, puis ouvre l'email pré-rempli.",
+    l_name:"Prénom du client", l_email:"Email du client", l_course:"Type de cours", l_date:"Date proposée",
+    l_start:"Heure début", l_end:"Heure fin", l_addr:"Adresse / Lieu",
+    l_studio:"Proposer aussi l'option « studio de danse à Paris, à votre charge »",
+    l_preview:"Aperçu de l'email", t_send:"Ouvrir l'email", t_copy:"Copier le texte",
+    t_hint:"L'email s'ouvre dans ta messagerie, déjà rempli et adressé au client. Tu n'as plus qu'à vérifier et envoyer.",
+    presets:["Esplanade de la BNF – Métro 14","L'Haÿ-les-Roses – Métro 14","À votre domicile (à préciser)"],
+    subject:"Confirmation de votre cours — Puto Chinez",
+    body:function(d){
+      var s="Bonjour "+(d.name||"")+",\n\n";
+      s+="Merci pour votre demande ! J'ai le plaisir de vous confirmer votre cours "+(d.course||"")+".\n\n";
+      s+="Créneau proposé :\n";
+      s+="Date : "+(d.date||"")+"\n";
+      s+="Horaire : de "+(d.start||"")+" à "+(d.end||"")+"\n";
+      s+="Lieu : "+(d.addr||"")+"\n";
+      if(d.studio){ s+="\nIl est aussi possible de réserver un studio de danse à Paris, à votre charge.\n"; }
+      s+="\nLe paiement se fait sur place. Si ce créneau vous convient, répondez-moi pour valider — sinon nous trouverons une autre date ensemble.\n\n";
+      s+="À très vite sur la piste,\nPuto Chinez\n@putochinez — putochinez.com";
+      return s;
+    }
+  },
+  en:{ title:"Compose a confirmation", sub:"Fill in the details, check the preview, then open the pre-filled email.",
+    l_name:"Client first name", l_email:"Client email", l_course:"Class type", l_date:"Proposed date",
+    l_start:"Start time", l_end:"End time", l_addr:"Address / Location",
+    l_studio:"Also offer the option “dance studio in Paris, at your own expense”",
+    l_preview:"Email preview", t_send:"Open the email", t_copy:"Copy the text",
+    t_hint:"The email opens in your mail app, already filled and addressed to the client. Just review and send.",
+    presets:["Esplanade de la BNF – Métro 14","L'Haÿ-les-Roses – Métro 14","At your home (to be specified)"],
+    subject:"Your class is confirmed — Puto Chinez",
+    body:function(d){
+      var s="Hi "+(d.name||"")+",\n\n";
+      s+="Thank you for your request! I'm happy to confirm your "+(d.course||"")+" class.\n\n";
+      s+="Proposed slot:\n";
+      s+="Date: "+(d.date||"")+"\n";
+      s+="Time: from "+(d.start||"")+" to "+(d.end||"")+"\n";
+      s+="Location: "+(d.addr||"")+"\n";
+      if(d.studio){ s+="\nYou can also book a dance studio in Paris, at your own expense.\n"; }
+      s+="\nPayment is made on site. If this slot works for you, reply to confirm — otherwise we'll find another date together.\n\n";
+      s+="See you soon on the dance floor,\nPuto Chinez\n@putochinez — putochinez.com";
+      return s;
+    }
+  }
+};
+
+function val(id){ return (document.getElementById(id).value||'').trim(); }
+function fmtDate(iso, lang){
+  if(!iso) return '';
+  var p=iso.split('-'); var d=new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));
+  try{ return d.toLocaleDateString(lang==='fr'?'fr-FR':'en-US',{weekday:'long',day:'numeric',month:'long',year:'numeric'}); }catch(e){ return iso; }
+}
+function data(){
+  return {
+    name:val('c_name'), email:val('c_email'), course:val('c_course'),
+    date:fmtDate(val('c_date'),LANG), start:val('c_start'), end:val('c_end'),
+    addr:val('c_addr'), studio:document.getElementById('c_studio').checked
+  };
+}
+function render(){
+  var u=UI[LANG], d=data();
+  document.getElementById('pv_subj').textContent=u.subject;
+  document.getElementById('pv_body').textContent=u.body(d);
+}
+function applyUI(){
+  var u=UI[LANG];
+  document.documentElement.lang=LANG;
+  ['title','sub','l_name','l_email','l_course','l_date','l_start','l_end','l_addr','l_studio','l_preview','t_send','t_copy','t_hint'].forEach(function(k){
+    var el=document.getElementById(k.indexOf('l_')===0||k==='title'||k==='sub'? (k==='title'?'t_title':(k==='sub'?'t_sub':k)) : k);
+  });
+  document.getElementById('t_title').textContent=u.title;
+  document.getElementById('t_sub').textContent=u.sub;
+  document.getElementById('l_name').textContent=u.l_name;
+  document.getElementById('l_email').textContent=u.l_email;
+  document.getElementById('l_course').textContent=u.l_course;
+  document.getElementById('l_date').textContent=u.l_date;
+  document.getElementById('l_start').textContent=u.l_start;
+  document.getElementById('l_end').textContent=u.l_end;
+  document.getElementById('l_addr').textContent=u.l_addr;
+  document.getElementById('l_studio').textContent=u.l_studio;
+  document.getElementById('l_preview').textContent=u.l_preview;
+  document.getElementById('t_send').textContent=u.t_send;
+  document.getElementById('t_copy').textContent=u.t_copy;
+  document.getElementById('t_hint').textContent=u.t_hint;
+  // presets
+  var pc=document.getElementById('presets'); pc.innerHTML='';
+  u.presets.forEach(function(p){
+    var btn=document.createElement('button'); btn.type='button'; btn.textContent=p;
+    btn.addEventListener('click',function(){ document.getElementById('c_addr').value=p; render(); });
+    pc.appendChild(btn);
+  });
+  render();
+}
+
+document.querySelectorAll('.langbar button').forEach(function(b){
+  b.addEventListener('click',function(){
+    LANG=b.getAttribute('data-l');
+    document.querySelectorAll('.langbar button').forEach(function(x){x.classList.toggle('active',x===b);});
+    applyUI();
+  });
+});
+['c_name','c_email','c_course','c_date','c_start','c_end','c_addr','c_studio'].forEach(function(id){
+  var el=document.getElementById(id); el.addEventListener('input',render); el.addEventListener('change',render);
+});
+
+document.getElementById('btn_send').addEventListener('click',function(e){
+  e.preventDefault();
+  var u=UI[LANG], d=data();
+  var mail='mailto:'+encodeURIComponent(d.email)+'?subject='+encodeURIComponent(u.subject)+'&body='+encodeURIComponent(u.body(d));
+  window.location.href=mail;
+});
+document.getElementById('btn_copy').addEventListener('click',function(){
+  var u=UI[LANG], d=data();
+  var txt=u.subject+'\n\n'+u.body(d);
+  if(navigator.clipboard){ navigator.clipboard.writeText(txt).then(function(){ alert(LANG==='fr'?'Texte copié ✅':'Text copied ✅'); }); }
+  else { alert(txt); }
+});
+
+applyUI();
+</script>
+</body>
+</html>
