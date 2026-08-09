@@ -19,6 +19,78 @@ locale: "fr"
 
 collections:
   # -------------------------------------------------------------------------
+  #  CONTENU  →  modifie la Description et la Bio (FR + EN)
+  # -------------------------------------------------------------------------
+  - name: "contenu"
+    label: "📝 Textes (Bio & Description)"
+    files:
+      - name: "textes"
+        label: "Bio & Description"
+        file: "data/content.json"
+        description: "Modifie les textes du site. Remplis toujours la version FR et EN. Clique Publish pour mettre en ligne."
+        fields:
+          - label: "Description des cours"
+            name: "classes_lead"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "text" }
+              - { label: "English", name: "en", widget: "text" }
+          - label: "Bio — Titre (champion)"
+            name: "bio_champ"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "string" }
+              - { label: "English", name: "en", widget: "string" }
+          - label: "Bio — Médailles"
+            name: "bio_medals"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "string" }
+              - { label: "English", name: "en", widget: "string" }
+          - label: "Bio — Ligne Penatchon"
+            name: "bio_penatchon"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "string" }
+              - { label: "English", name: "en", widget: "string" }
+          - label: "Bio — Ligne Flores do Semba"
+            name: "bio_flores"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "string" }
+              - { label: "English", name: "en", widget: "string" }
+          - label: "Bio — Professeur depuis…"
+            name: "bio_since"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "string" }
+              - { label: "English", name: "en", widget: "string" }
+          - label: "Bio — Paragraphe 1"
+            name: "bio_p1"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "text" }
+              - { label: "English", name: "en", widget: "text" }
+          - label: "Bio — Paragraphe 2"
+            name: "bio_p2"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "text" }
+              - { label: "English", name: "en", widget: "text" }
+          - label: "Bio — Paragraphe 3"
+            name: "bio_p3"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "text" }
+              - { label: "English", name: "en", widget: "text" }
+          - label: "Bio — Paragraphe 4"
+            name: "bio_p4"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "text" }
+              - { label: "English", name: "en", widget: "text" }
+
+  # -------------------------------------------------------------------------
   #  AVIS  →  ajoute / modifie / supprime des avis avec un formulaire
   # -------------------------------------------------------------------------
   - name: "avis"

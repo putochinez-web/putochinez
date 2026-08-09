@@ -206,6 +206,9 @@
     .direct{flex-direction:column;}
     .direct .btn{min-width:0;width:100%;}
     .float-book{display:flex;}
+    .pillars{font-size:.8rem;letter-spacing:.1em;}
+    .pillars .pil-last{display:block;margin-top:3px;}
+    .pillars .pil-dot{display:none;}
     footer{padding-bottom:96px;}
     .hero{padding-top:70px;}
   }
@@ -400,7 +403,7 @@ var I18N = {
     hero_script:"Private", hero_big:"Classes",
     enhance:"Enhance your dance",
     modes:"Solo &nbsp;|&nbsp; Couple or small group",
-    pillars:"Foundations <b>•</b> Technique <b>•</b> Musicality",
+    pillars:"Foundations <b>•</b> Technique <span class=\"pil-last\"><b class=\"pil-dot\">•</b> Musicality</span>",
     cta_book:"Book your session →",
     classes_title:"The classes",
     classes_lead:"17+ years of experience in Kizomba &amp; Semba. Whether you're a beginner or an experienced dancer, each class is tailored to your goals. Build solid foundations, improve your technique, musicality, connection, and confidence on the dance floor.",
@@ -409,9 +412,9 @@ var I18N = {
     p3_k:"Musicality", p3_v:"Feel the music, connect, dance with confidence.",
     bio_title:"Biography",
     bio_champ:"Africadançar Kizomba Champion",
-    bio_medals:"🥇 <b>France</b> &nbsp;·&nbsp; 🥈 <b>World</b>",
-    bio_penatchon:"Co-Founder of <b>Penatchon</b> Dance School",
-    bio_flores:"Founder of <b>Flores do Semba</b> Dance School",
+    bio_medals:"🥇 France · 🥈 World",
+    bio_penatchon:"Co-Founder of Penatchon Dance School",
+    bio_flores:"Founder of Flores do Semba Dance School",
     bio_since:"International dance teacher since 2011.",
     bio_p1:"Puto Chinez has been teaching Kizomba and Semba for over 17 years.",
     bio_p2:"Trained in France and later at the source in Angola through immersive stays devoted to both technique and culture, he is regarded as a pioneer who helped bring an authentic vision of Kizomba and Semba to France.",
@@ -448,7 +451,7 @@ var I18N = {
     hero_script:"Cours", hero_big:"Privés",
     enhance:"Sublimez votre danse",
     modes:"Solo &nbsp;|&nbsp; Couple ou petit groupe",
-    pillars:"Fondations <b>•</b> Technique <b>•</b> Musicalité",
+    pillars:"Fondations <b>•</b> Technique <span class=\"pil-last\"><b class=\"pil-dot\">•</b> Musicalité</span>",
     cta_book:"Réserver un cours →",
     classes_title:"Les cours",
     classes_lead:"Plus de 17 ans d'expérience en Kizomba &amp; Semba. Que vous soyez débutant ou danseur confirmé, chaque cours est adapté à vos objectifs. Construisez des bases solides, améliorez votre technique, votre musicalité, votre connexion et votre confiance sur la piste.",
@@ -457,9 +460,9 @@ var I18N = {
     p3_k:"Musicalité", p3_v:"Ressentez la musique, connectez, dansez avec confiance.",
     bio_title:"Biographie",
     bio_champ:"Champion Africadançar Kizomba",
-    bio_medals:"🥇 <b>France</b> &nbsp;·&nbsp; 🥈 <b>Monde</b>",
-    bio_penatchon:"Co-fondateur de l'école de danse <b>Penatchon</b>",
-    bio_flores:"Fondateur de l'école de danse <b>Flores do Semba</b>",
+    bio_medals:"🥇 France · 🥈 Monde",
+    bio_penatchon:"Co-fondateur de l'école de danse Penatchon",
+    bio_flores:"Fondateur de l'école de danse Flores do Semba",
     bio_since:"Professeur de danse international depuis 2011.",
     bio_p1:"Puto Chinez enseigne la Kizomba et la Semba depuis plus de 17 ans.",
     bio_p2:"Formé en France puis à la source en Angola lors de séjours immersifs consacrés à la technique et à la culture, il est considéré comme un pionnier ayant contribué à apporter une vision authentique de la Kizomba et de la Semba en France.",
@@ -717,6 +720,24 @@ document.getElementById('reviewFormEl').addEventListener('submit', function(e){
   var saved=null; try{ saved = localStorage.getItem('pc_lang'); }catch(e){}
   var lang = saved || ((navigator.language||'en').toLowerCase().indexOf('fr')===0 ? 'fr' : 'en');
   applyLang(lang);
+})();
+
+/* ---------- load editable content (Bio / Description) from the CMS data file ---------- */
+(function(){
+  fetch('/data/content.json', {cache:'no-store'})
+    .then(function(r){ return r.ok ? r.json() : null; })
+    .then(function(d){
+      if(!d) return;
+      Object.keys(d).forEach(function(key){
+        var v = d[key];
+        if(v && typeof v === 'object'){
+          if(typeof v.fr === 'string' && v.fr.trim()) I18N.fr[key] = v.fr;
+          if(typeof v.en === 'string' && v.en.trim()) I18N.en[key] = v.en;
+        }
+      });
+      applyLang(currentLang); /* re-render with the edited texts */
+    })
+    .catch(function(){ /* no content file yet — keep defaults */ });
 })();
 
 /* ---------- load published reviews from the CMS data file (if present) ---------- */
