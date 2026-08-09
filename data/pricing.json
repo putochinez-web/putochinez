@@ -5,18 +5,77 @@
     "en": "Minimum 2h per class · indicative price · payment on site"
   },
   "promo": {
-    "active": false,
-    "percent": 0,
-    "label": { "fr": "", "en": "" }
+    "active": true,
+    "percent": 5,
+    "label": {
+      "fr": "",
+      "en": ""
+    }
   },
   "types": [
-    { "label": { "fr": "Solo — 2h", "en": "Solo — 2h" }, "price": 140, "enabled": true },
-    { "label": { "fr": "Solo — forfait 5h", "en": "Solo — 5h pack" }, "price": 275, "enabled": true },
-    { "label": { "fr": "Solo — forfait 10h", "en": "Solo — 10h pack" }, "price": 500, "enabled": true },
-    { "label": { "fr": "Couple — 2h", "en": "Couple — 2h" }, "price": 200, "enabled": true },
-    { "label": { "fr": "Couple — forfait 5h", "en": "Couple — 5h pack" }, "price": 400, "enabled": true },
-    { "label": { "fr": "Couple — forfait 10h", "en": "Couple — 10h pack" }, "price": 750, "enabled": true },
-    { "label": { "fr": "Mini-groupe (3–5 couples)", "en": "Mini-group (3–5 couples)" }, "price": 0, "enabled": true },
-    { "label": { "fr": "Je ne sais pas encore", "en": "Not sure yet" }, "price": 0, "enabled": true }
+    {
+      "label": {
+        "fr": "Solo — 2h",
+        "en": "Solo — 2h"
+      },
+      "price": 140,
+      "enabled": true
+    },
+    {
+      "label": {
+        "fr": "Solo — forfait 5h",
+        "en": "Solo — 5h pack"
+      },
+      "price": 275,
+      "enabled": true
+    },
+    {
+      "label": {
+        "fr": "Solo — forfait 10h",
+        "en": "Solo — 10h pack"
+      },
+      "price": 500,
+      "enabled": true
+    },
+    {
+      "label": {
+        "fr": "Couple — 2h",
+        "en": "Couple — 2h"
+      },
+      "price": 200,
+      "enabled": true
+    },
+    {
+      "label": {
+        "fr": "Couple — forfait 5h",
+        "en": "Couple — 5h pack"
+      },
+      "price": 400,
+      "enabled": true
+    },
+    {
+      "label": {
+        "fr": "Couple — forfait 10h",
+        "en": "Couple — 10h pack"
+      },
+      "price": 750,
+      "enabled": true
+    },
+    {
+      "label": {
+        "fr": "Mini-groupe (3–5 couples)",
+        "en": "Mini-group (3–5 couples)"
+      },
+      "price": 0,
+      "enabled": true
+    },
+    {
+      "label": {
+        "fr": "Je ne sais pas encore",
+        "en": "Not sure yet"
+      },
+      "price": 0,
+      "enabled": true
+    }
   ]
 }
