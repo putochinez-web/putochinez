@@ -67,6 +67,27 @@
     background:rgba(252,250,244,.85);backdrop-filter:blur(6px);
     border:1px solid var(--line);border-radius:999px;padding:4px;box-shadow:0 6px 18px -8px rgba(45,30,15,.4);
   }
+  /* nav menu */
+  .nav-menu{position:fixed;top:12px;left:12px;z-index:61;}
+  .nav-toggle{
+    display:flex;align-items:center;gap:.4em;cursor:pointer;font-family:inherit;
+    background:rgba(252,250,244,.85);backdrop-filter:blur(6px);border:1px solid var(--line);
+    border-radius:999px;padding:8px 14px;font-size:.82rem;font-weight:700;color:var(--ink-soft);
+    letter-spacing:.03em;box-shadow:0 6px 18px -8px rgba(45,30,15,.4);
+  }
+  .nav-toggle .nav-ico{font-size:1rem;line-height:1;}
+  .nav-panel{
+    position:absolute;top:calc(100% + 8px);left:0;min-width:220px;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 18px 44px -18px rgba(45,30,15,.5);padding:8px;display:flex;flex-direction:column;
+  }
+  .nav-panel a{
+    text-decoration:none;color:var(--ink);font-weight:600;font-size:.95rem;
+    padding:11px 14px;border-radius:9px;transition:background .12s ease,color .12s ease;
+  }
+  .nav-panel a:hover{background:var(--bg-2);color:var(--gold);}
+  .nav-panel .nav-admin{margin-top:6px;border-top:1px solid var(--line);border-radius:0 0 9px 9px;color:var(--gold);font-size:.9rem;padding-top:12px;}
+  .nav-panel .nav-admin:hover{background:var(--espresso);color:var(--gold-bright);}
   .lang-switch button{
     border:none;background:transparent;cursor:pointer;font-family:inherit;
     font-size:.8rem;font-weight:700;letter-spacing:.03em;color:var(--ink-soft);
@@ -235,8 +256,22 @@
   <button data-lang="fr"><span class="flag">🇫🇷</span> FR</button>
 </div>
 
+<!-- NAV MENU -->
+<div class="nav-menu" id="navMenu">
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <span class="nav-ico">☰</span> <span data-i18n="nav_menu">Menu</span>
+  </button>
+  <nav class="nav-panel" id="navPanel" hidden>
+    <a href="#top" data-nav="top" data-i18n="nav_home">Accueil</a>
+    <a href="#bio" data-nav="#bio" data-i18n="nav_bio">Biographie</a>
+    <a href="#book" data-nav="#book" data-i18n="nav_book">Réserver un cours</a>
+    <a href="#reviews" data-nav="#reviews" data-i18n="nav_reviews">Donner un avis</a>
+    <a href="/admin" target="_blank" rel="noopener" class="nav-admin" data-i18n="nav_admin">🔒 Admin</a>
+  </nav>
+</div>
+
 <!-- HERO -->
-<header class="hero">
+<header class="hero" id="top">
   <div class="wrap">
     <div class="lockup">
       <span class="script-priv" data-i18n="hero_script">Private</span>
@@ -410,7 +445,7 @@
 var I18N = {
   en:{
     hero_script:"Private", hero_big:"Classes",
-    enhance:"Enhance your dance",
+    enhance:"Enhance your dance", nav_menu:"Menu", nav_home:"Home", nav_bio:"Biography", nav_book:"Book a class", nav_reviews:"Leave a review", nav_admin:"🔒 Admin",
     modes:"Solo &nbsp;|&nbsp; Couple or small group",
     pillars:"Foundations <b>•</b> Technique <b>•</b> Musicality",
     cta_book:"Book your session →",
@@ -458,7 +493,7 @@ var I18N = {
   },
   fr:{
     hero_script:"Cours", hero_big:"Privés",
-    enhance:"Sublimez votre danse",
+    enhance:"Sublimez votre danse", nav_menu:"Menu", nav_home:"Accueil", nav_bio:"Biographie", nav_book:"Réserver un cours", nav_reviews:"Donner un avis", nav_admin:"🔒 Admin",
     modes:"Solo &nbsp;|&nbsp; Couple ou petit groupe",
     pillars:"Fondations <b>•</b> Technique <b>•</b> Musicalité",
     cta_book:"Réserver un cours →",
@@ -541,6 +576,24 @@ function applyLang(lang){
 document.querySelectorAll('#langSwitch button').forEach(function(b){
   b.addEventListener('click', function(){ applyLang(b.getAttribute('data-lang')); });
 });
+
+/* ---------- nav menu ---------- */
+(function(){
+  var toggle=document.getElementById('navToggle'), panel=document.getElementById('navPanel'), menu=document.getElementById('navMenu');
+  if(!toggle||!panel) return;
+  function open(){ panel.hidden=false; toggle.setAttribute('aria-expanded','true'); }
+  function close(){ panel.hidden=true; toggle.setAttribute('aria-expanded','false'); }
+  toggle.addEventListener('click', function(e){ e.stopPropagation(); if(panel.hidden) open(); else close(); });
+  document.addEventListener('click', function(e){ if(!menu.contains(e.target)) close(); });
+  panel.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var nav=a.getAttribute('data-nav');
+      if(nav==='top'){ e.preventDefault(); window.scrollTo({top:0,behavior:'smooth'}); close(); }
+      else if(nav && nav.indexOf('#')===0){ e.preventDefault(); var t=document.querySelector(nav); if(t){ t.scrollIntoView({behavior:'smooth',block:'start'}); } close(); }
+      else { close(); } /* Admin link: let it open normally (new tab) */
+    });
+  });
+})();
 
 /* ---------- scroll reveal ---------- */
 (function(){
@@ -700,6 +753,21 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
   e.preventDefault();
   var form = e.target;
   var lg=document.getElementById('blang'); if(lg) lg.value=currentLang;
+  // store the booking in /admin (pending) — reliable, in addition to the email
+  try{
+    var hpB=(form.querySelector('[name="bot-field"]')||{value:''}).value;
+    fetch('/.netlify/functions/add-booking',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      name:document.getElementById('bname').value.trim(),
+      email:document.getElementById('bemail').value.trim(),
+      course:document.getElementById('btype').value,
+      quantity:document.getElementById('bqty').value,
+      date:document.getElementById('bdate').value,
+      total:document.getElementById('btotal').value,
+      promo:document.getElementById('bpromo').value,
+      message:document.getElementById('bmsg').value.trim(),
+      lang:currentLang, hp:hpB
+    })}).catch(function(){});
+  }catch(e){}
   var btn = form.querySelector('button[type=submit]');
   var msg = document.getElementById('bookMsg');
   msg.hidden = true; msg.classList.remove('err');
@@ -732,9 +800,9 @@ var chosenRating = 0;
 
 /* Default reviews (fallback). The visual admin panel edits data/reviews.json, which overrides these when present. */
 var REVIEWS_SEED = [
-  {name:"Marina", rating:5, lang:"fr", date:"2026-08-02", txt:"Les meilleurs cours privés que j'ai suivis. Puto décortique chaque détail et ma Kizomba a complètement changé en quelques séances."},
-  {name:"Sofia", rating:5, lang:"en", date:"2026-08-05", txt:"A true reference for Semba. The musicality work is on another level. Highly recommend."},
-  {name:"João", rating:5, lang:"pt", date:"2026-08-07", txt:"Aulas incríveis. O Puto ensina a verdadeira essência do Semba, com muita paciência e energia. Recomendo demais!"}
+  {name:"Marina", rating:5, lang:"fr", date:"2026-08-02", published:true, txt:"Les meilleurs cours privés que j'ai suivis. Puto décortique chaque détail et ma Kizomba a complètement changé en quelques séances."},
+  {name:"Sofia", rating:5, lang:"en", date:"2026-08-05", published:true, txt:"A true reference for Semba. The musicality work is on another level. Highly recommend."},
+  {name:"João", rating:5, lang:"pt", date:"2026-08-07", published:true, txt:"Aulas incríveis. O Puto ensina a verdadeira essência do Semba, com muita paciência e energia. Recomendo demais!"}
 ];
 var PUBLISHED_REVIEWS = null; /* filled from data/reviews.json when available */
 function loadReviews(){
