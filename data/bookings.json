@@ -1,32 +1,37 @@
 {
   "bookings": [
     {
-      "status": "A traiter",
-      "name": "DIAG-Test",
-      "email": "ptoffa@gmail.com",
-      "course": "Solo — 2h",
-      "quantity": "1",
-      "date": "2026-08-20",
-      "total": "140 €",
-      "promo": "",
-      "message": "",
-      "lang": "fr",
       "received": "2026-08-10 12:34",
-      "note": ""
+      "total": "140 €",
+      "message": "",
+      "quantity": "1",
+      "name": "DIAG-Test",
+      "lang": "fr",
+      "date": "2026-08-20",
+      "promo": "",
+      "note": "",
+      "status": "A traiter",
+      "course": "Solo — 2h",
+      "email": "ptoffa@gmail.com"
     },
     {
-      "status": "A traiter",
-      "name": "PTO",
-      "email": "ptoffa@gmail.com",
-      "course": "Solo — 2h",
-      "quantity": "1",
-      "date": "2026-08-15",
-      "total": "140 €",
-      "promo": "",
-      "message": "cadre",
-      "lang": "en",
       "received": "2026-08-10 12:01",
-      "note": ""
+      "confirm_start": "14:00",
+      "total": "140 €",
+      "message": "cadre",
+      "quantity": "1",
+      "name": "PTO",
+      "confirm_date": "2026-08-13",
+      "lang": "en",
+      "date": "2026-08-15",
+      "promo": "",
+      "confirm_addr": "metro",
+      "note": "",
+      "status": "Confirmee",
+      "confirm_studio": false,
+      "course": "Solo — 2h",
+      "confirm_end": "16:00",
+      "email": "ptoffa@gmail.com"
     }
   ]
 }
