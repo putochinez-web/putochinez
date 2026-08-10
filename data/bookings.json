@@ -1,6 +1,20 @@
 {
   "bookings": [
     {
+      "status": "A traiter",
+      "name": "TEST-CLAUDE",
+      "email": "test-visiteur@example.com",
+      "course": "Solo — 2h",
+      "quantity": "1",
+      "date": "2026-08-18",
+      "total": "140 €",
+      "promo": "",
+      "message": "",
+      "lang": "fr",
+      "received": "2026-08-10 13:25",
+      "note": ""
+    },
+    {
       "received": "2026-08-10 13:17",
       "confirm_start": "12:23",
       "total": "500 €",
