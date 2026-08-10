@@ -1,18 +1,21 @@
 {
   "bookings": [
     {
-      "status": "A traiter",
-      "name": "TORA",
-      "email": "ptoffa@gmail.com",
-      "course": "Solo — 10h pack",
-      "quantity": "1",
-      "date": "2026-08-15",
-      "total": "500 €",
-      "promo": "",
-      "message": "style",
-      "lang": "en",
       "received": "2026-08-10 13:17",
-      "note": ""
+      "confirm_start": "12:23",
+      "total": "500 €",
+      "message": "style",
+      "quantity": "1",
+      "name": "TORA",
+      "lang": "en",
+      "date": "2026-08-15",
+      "promo": "",
+      "note": "",
+      "status": "Confirmee",
+      "confirm_studio": true,
+      "course": "Solo — 10h pack",
+      "confirm_end": "15:56",
+      "email": "ptoffa@gmail.com"
     },
     {
       "received": "2026-08-10 12:34",
