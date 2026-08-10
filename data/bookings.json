@@ -2,6 +2,9 @@
   "bookings": [
     {
       "received": "2026-08-10 12:34",
+      "confirm_msg": "Venez si possible avec des chaussures de danse.",
+      "confirm_start": "12:05",
+      "confirm_addr_autre": "6B av du gnl de gaulle chevilly larue",
       "total": "140 €",
       "message": "",
       "quantity": "1",
@@ -9,9 +12,12 @@
       "lang": "fr",
       "date": "2026-08-20",
       "promo": "",
+      "confirm_addr": "À votre domicile",
       "note": "",
-      "status": "A traiter",
+      "status": "Confirmee",
+      "confirm_studio": true,
       "course": "Solo — 2h",
+      "confirm_end": "15:50",
       "email": "ptoffa@gmail.com"
     },
     {
@@ -30,9 +36,9 @@
       "status": "Confirmee",
       "confirm_studio": false,
       "course": "Solo — 2h",
+      "emailed": "2026-08-10 12:43",
       "confirm_end": "16:00",
-      "email": "ptoffa@gmail.com",
-      "emailed": "2026-08-10 12:43"
+      "email": "ptoffa@gmail.com"
     }
   ]
 }
