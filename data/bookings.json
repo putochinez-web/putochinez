@@ -1,32 +1,37 @@
 {
   "bookings": [
     {
-      "status": "A traiter",
-      "name": "TOTORONO",
-      "email": "ptoffa@gmail.com",
-      "course": "Solo — 5h pack",
-      "quantity": "2",
-      "date": "2026-08-19",
-      "total": "550 €",
-      "promo": "",
-      "message": "cadre",
-      "lang": "en",
       "received": "2026-08-10 13:28",
-      "note": ""
+      "confirm_start": "15:32",
+      "total": "550 €",
+      "message": "cadre",
+      "quantity": "2",
+      "name": "TOTORONO",
+      "confirm_date": "2026-08-10",
+      "lang": "en",
+      "date": "2026-08-19",
+      "promo": "",
+      "confirm_addr": "Esplanade de la BNF – Métro 14",
+      "note": "",
+      "status": "Confirmee",
+      "confirm_studio": true,
+      "course": "Solo — 5h pack",
+      "confirm_end": "18:32",
+      "email": "ptoffa@gmail.com"
     },
     {
-      "status": "A traiter",
-      "name": "TEST-CLAUDE",
-      "email": "test-visiteur@example.com",
-      "course": "Solo — 2h",
-      "quantity": "1",
-      "date": "2026-08-18",
-      "total": "140 €",
-      "promo": "",
-      "message": "",
-      "lang": "fr",
       "received": "2026-08-10 13:25",
-      "note": ""
+      "total": "140 €",
+      "message": "",
+      "quantity": "1",
+      "name": "TEST-CLAUDE",
+      "lang": "fr",
+      "date": "2026-08-18",
+      "promo": "",
+      "note": "",
+      "status": "A traiter",
+      "course": "Solo — 2h",
+      "email": "test-visiteur@example.com"
     },
     {
       "received": "2026-08-10 13:17",
@@ -42,9 +47,9 @@
       "status": "Confirmee",
       "confirm_studio": true,
       "course": "Solo — 10h pack",
+      "emailed": "2026-08-10 13:23",
       "confirm_end": "15:56",
-      "email": "ptoffa@gmail.com",
-      "emailed": "2026-08-10 13:23"
+      "email": "ptoffa@gmail.com"
     },
     {
       "received": "2026-08-10 12:34",
