@@ -1,0 +1,223 @@
+# ===========================================================================
+#  Configuration du panneau d'admin visuel (Decap CMS) — Puto Chinez
+# ---------------------------------------------------------------------------
+#  ⚠️  UNE SEULE CHOSE À MODIFIER : remplace "TON-UTILISATEUR/TON-DEPOT"
+#      ci-dessous par ton dépôt GitHub réel (ex: putochinez/site).
+# ===========================================================================
+
+backend:
+  name: github
+  repo: putochinez-web/putochinez   # ton dépôt GitHub
+  branch: main
+
+# Dossier pour d'éventuelles images ajoutées depuis le panneau
+media_folder: "images"
+public_folder: "/images"
+
+# Langue de l'interface du panneau
+locale: "fr"
+
+collections:
+  # -------------------------------------------------------------------------
+  #  RÉSERVATIONS  →  les demandes arrivent ici automatiquement
+  # -------------------------------------------------------------------------
+  - name: "reservations"
+    label: "📋 Réservations"
+    files:
+      - name: "bookings"
+        label: "Demandes reçues"
+        file: "data/bookings.json"
+        description: "Les demandes de réservation arrivent ici automatiquement. Change le statut quand tu as répondu au client."
+        fields:
+          - label: "Réservations"
+            name: "bookings"
+            widget: "list"
+            label_singular: "une demande"
+            summary: "{{fields.name}} · {{fields.course}} · {{fields.status}}"
+            fields:
+              - label: "Statut"
+                name: "status"
+                widget: "select"
+                default: "A traiter"
+                options:
+                  - { label: "🟡 À traiter", value: "A traiter" }
+                  - { label: "🟢 Confirmée", value: "Confirmee" }
+                  - { label: "🔴 Refusée", value: "Refusee" }
+                  - { label: "⚪ Annulée", value: "Annulee" }
+              - { label: "Nom", name: "name", widget: "string", required: false }
+              - { label: "Email", name: "email", widget: "string", required: false }
+              - { label: "Cours", name: "course", widget: "string", required: false }
+              - { label: "Quantité", name: "quantity", widget: "string", required: false }
+              - { label: "Date souhaitée", name: "date", widget: "string", required: false }
+              - { label: "Total indicatif", name: "total", widget: "string", required: false }
+              - { label: "Promo", name: "promo", widget: "string", required: false }
+              - { label: "Message du client", name: "message", widget: "text", required: false }
+              - { label: "Langue du client", name: "lang", widget: "string", required: false }
+              - { label: "Reçu le", name: "received", widget: "string", required: false }
+              - { label: "Note interne (privée)", name: "note", widget: "text", required: false }
+              - { label: "Créneau — Date proposée", name: "confirm_date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, required: false }
+              - { label: "Créneau — Heure début (ex: 14:00)", name: "confirm_start", widget: "string", required: false }
+              - { label: "Créneau — Heure fin (ex: 16:00)", name: "confirm_end", widget: "string", required: false }
+              - { label: "Lieu (adresse, ou Esplanade BNF…)", name: "confirm_addr", widget: "string", required: false }
+              - { label: "Proposer aussi l'option studio à Paris", name: "confirm_studio", widget: "boolean", default: false, required: false }
+              - { label: "✉️ Confirmation envoyée le (auto — ne pas modifier)", name: "emailed", widget: "string", required: false }
+
+  # -------------------------------------------------------------------------
+  #  TARIFS  →  types de cours, prix, promo (min 2h = ne propose que du 2h+)
+  # -------------------------------------------------------------------------
+  - name: "tarifs"
+    label: "💶 Tarifs & Promo"
+    files:
+      - name: "pricing"
+        label: "Tarifs & Promo"
+        file: "data/pricing.json"
+        description: "Gère tes cours et leurs prix. Le site calcule le total = prix × quantité. Mets 0 comme prix pour afficher « Prix sur demande »."
+        fields:
+          - { label: "Devise", name: "currency", widget: "string", default: "€" }
+          - label: "Note affichée sous le total"
+            name: "note"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "string" }
+              - { label: "English", name: "en", widget: "string" }
+          - label: "Promo GLOBALE (prioritaire — si active, ignore les promos par cours)"
+            name: "global_promo"
+            widget: "object"
+            fields:
+              - { label: "Active ?", name: "active", widget: "boolean", default: false }
+              - { label: "Réduction (%)", name: "percent", widget: "number", value_type: "int", default: 0, min: 0, max: 100 }
+              - label: "Libellé (ex: Rentrée)"
+                name: "label"
+                widget: "object"
+                fields:
+                  - { label: "Français", name: "fr", widget: "string", required: false }
+                  - { label: "English", name: "en", widget: "string", required: false }
+          - label: "Codes promo (pour tes fidèles — cumulatif avec la promo de base)"
+            name: "codes"
+            widget: "list"
+            label_singular: "un code"
+            required: false
+            summary: "{{fields.code}} — {{fields.percent}}% {{#if fields.active}}(actif){{/if}}"
+            fields:
+              - { label: "Code (ex: FIDELE10)", name: "code", widget: "string" }
+              - { label: "Réduction (%)", name: "percent", widget: "number", value_type: "int", default: 10, min: 0, max: 100 }
+              - { label: "Actif ?", name: "active", widget: "boolean", default: true }
+          - label: "Types de cours"
+            name: "types"
+            widget: "list"
+            label_singular: "un type de cours"
+            summary: "{{fields.label.fr}} — {{fields.price}} € {{#if fields.promo}}(−{{fields.promo}}%){{/if}}"
+            fields:
+              - label: "Nom du cours"
+                name: "label"
+                widget: "object"
+                fields:
+                  - { label: "Français", name: "fr", widget: "string" }
+                  - { label: "English", name: "en", widget: "string" }
+              - { label: "Prix (€) — 0 = sur demande", name: "price", widget: "number", value_type: "int", default: 0 }
+              - { label: "Promo sur ce cours (%) — 0 = aucune", name: "promo", widget: "number", value_type: "int", default: 0, min: 0, max: 100 }
+              - { label: "Visible sur le site ?", name: "enabled", widget: "boolean", default: true }
+
+  # -------------------------------------------------------------------------
+  #  CONTENU  →  modifie la Description et la Bio (FR + EN)
+  # -------------------------------------------------------------------------
+  - name: "contenu"
+    label: "📝 Textes (Bio & Description)"
+    files:
+      - name: "textes"
+        label: "Bio & Description"
+        file: "data/content.json"
+        description: "Modifie les textes du site. Remplis toujours la version FR et EN. Clique Publish pour mettre en ligne."
+        fields:
+          - label: "Description des cours"
+            name: "classes_lead"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "text" }
+              - { label: "English", name: "en", widget: "text" }
+          - label: "Bio — Titre (champion)"
+            name: "bio_champ"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "string" }
+              - { label: "English", name: "en", widget: "string" }
+          - label: "Bio — Médailles"
+            name: "bio_medals"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "string" }
+              - { label: "English", name: "en", widget: "string" }
+          - label: "Bio — Ligne Penatchon"
+            name: "bio_penatchon"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "string" }
+              - { label: "English", name: "en", widget: "string" }
+          - label: "Bio — Ligne Flores do Semba"
+            name: "bio_flores"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "string" }
+              - { label: "English", name: "en", widget: "string" }
+          - label: "Bio — Professeur depuis…"
+            name: "bio_since"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "string" }
+              - { label: "English", name: "en", widget: "string" }
+          - label: "Bio — Paragraphe 1"
+            name: "bio_p1"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "text" }
+              - { label: "English", name: "en", widget: "text" }
+          - label: "Bio — Paragraphe 2"
+            name: "bio_p2"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "text" }
+              - { label: "English", name: "en", widget: "text" }
+          - label: "Bio — Paragraphe 3"
+            name: "bio_p3"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "text" }
+              - { label: "English", name: "en", widget: "text" }
+          - label: "Bio — Paragraphe 4"
+            name: "bio_p4"
+            widget: "object"
+            fields:
+              - { label: "Français", name: "fr", widget: "text" }
+              - { label: "English", name: "en", widget: "text" }
+
+  # -------------------------------------------------------------------------
+  #  AVIS  →  ajoute / modifie / supprime des avis avec un formulaire
+  # -------------------------------------------------------------------------
+  - name: "avis"
+    label: "⭐ Avis"
+    files:
+      - name: "reviews"
+        label: "Liste des avis"
+        file: "data/reviews.json"
+        description: "Ajoute, modifie ou supprime des avis. Chaque enregistrement met le site à jour."
+        fields:
+          - label: "Avis"
+            name: "reviews"
+            widget: "list"
+            label_singular: "un avis"
+            summary: "{{fields.name}} — {{fields.rating}}★ · publié: {{fields.published}}"
+            fields:
+              - { label: "✅ Publié (visible sur le site)", name: "published", widget: "boolean", default: true }
+              - { label: "Nom", name: "name", widget: "string" }
+              - { label: "Note (1 à 5)", name: "rating", widget: "number", value_type: "int", min: 1, max: 5, default: 5 }
+              - label: "Langue de l'avis"
+                name: "lang"
+                widget: "select"
+                options:
+                  - { label: "Français", value: "fr" }
+                  - { label: "Anglais", value: "en" }
+                  - { label: "Portugais", value: "pt" }
+                  - { label: "Espagnol", value: "es" }
+                default: "fr"
+              - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, required: false }
+              - { label: "Texte de l'avis", name: "txt", widget: "text" }
