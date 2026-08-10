@@ -55,6 +55,12 @@ collections:
               - { label: "Langue du client", name: "lang", widget: "string", required: false }
               - { label: "Reçu le", name: "received", widget: "string", required: false }
               - { label: "Note interne (privée)", name: "note", widget: "text", required: false }
+              - { label: "Créneau — Date proposée", name: "confirm_date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, required: false }
+              - { label: "Créneau — Heure début (ex: 14:00)", name: "confirm_start", widget: "string", required: false }
+              - { label: "Créneau — Heure fin (ex: 16:00)", name: "confirm_end", widget: "string", required: false }
+              - { label: "Lieu (adresse, ou Esplanade BNF…)", name: "confirm_addr", widget: "string", required: false }
+              - { label: "Proposer aussi l'option studio à Paris", name: "confirm_studio", widget: "boolean", default: false, required: false }
+              - { label: "✉️ Confirmation envoyée le (auto — ne pas modifier)", name: "emailed", widget: "string", required: false }
 
   # -------------------------------------------------------------------------
   #  TARIFS  →  types de cours, prix, promo (min 2h = ne propose que du 2h+)
@@ -213,5 +219,5 @@ collections:
                   - { label: "Portugais", value: "pt" }
                   - { label: "Espagnol", value: "es" }
                 default: "fr"
-              - { label: "Date", name: "date", widget: "date", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+              - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, required: false }
               - { label: "Texte de l'avis", name: "txt", widget: "text" }
