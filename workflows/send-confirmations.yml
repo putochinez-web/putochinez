@@ -1,0 +1,29 @@
+name: Send confirmation emails
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/bookings.json'
+
+permissions:
+  contents: write
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Send confirmations
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          MAIL_FROM: ${{ secrets.MAIL_FROM }}
+          MAIL_REPLYTO: ${{ secrets.MAIL_REPLYTO }}
+        run: node .github/scripts/send-confirmations.mjs
+      - name: Commit sent flags
+        run: |
+          git config user.name "puto-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/bookings.json
+          git diff --staged --quiet || git commit -m "Confirmations envoyees [skip ci]"
+          git push
