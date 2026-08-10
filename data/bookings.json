@@ -3,23 +3,23 @@
     {
       "received": "2026-08-10 12:34",
       "confirm_msg": "Venez si possible avec des chaussures de danse.",
-      "confirm_start": "12:05",
+      "confirm_start": "13:05",
       "confirm_addr_autre": "6B av du gnl de gaulle chevilly larue",
       "total": "140 €",
-      "message": "",
+      "message": "reporté",
       "quantity": "1",
       "name": "DIAG-Test",
       "lang": "fr",
-      "date": "2026-08-20",
+      "date": "2026-08-23",
       "promo": "",
       "confirm_addr": "À votre domicile",
       "note": "",
       "status": "Confirmee",
       "confirm_studio": true,
       "course": "Solo — 2h",
+      "emailed": "2026-08-10 13:06",
       "confirm_end": "15:50",
-      "email": "ptoffa@gmail.com",
-      "emailed": "2026-08-10 13:06"
+      "email": "ptoffa@gmail.com"
     },
     {
       "received": "2026-08-10 12:01",
