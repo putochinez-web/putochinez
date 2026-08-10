@@ -1,35 +1,7 @@
 {
   "reviews": [
-    {
-      "name": "Marina",
-      "rating": 5,
-      "lang": "fr",
-      "date": "2026-08-02",
-      "published": true,
-      "txt": "Les meilleurs cours privés que j'ai suivis. Puto décortique chaque détail et ma Kizomba a complètement changé en quelques séances."
-    },
-    {
-      "name": "Sofia",
-      "rating": 5,
-      "lang": "en",
-      "date": "2026-08-05",
-      "published": true,
-      "txt": "A true reference for Semba. The musicality work is on another level. Highly recommend."
-    },
-    {
-      "name": "João",
-      "rating": 5,
-      "lang": "pt",
-      "date": "2026-08-07",
-      "published": true,
-      "txt": "Aulas incríveis.  A verdadeira essência do Semba, com muita paciência e energia. Recomendo demais!"
-    },
-    {
-      "published": true,
-      "rating": 5,
-      "lang": "fr",
-      "name": "Eddu",
-      "txt": "Des années d expérience sur la \ntransmission de notions. Un œil expert pour vous accompagner en profondeur quel que soit votre niveau. Fait partie des meilleurs cours que jai pu prendre. Vous verrez forcément votre danse évoluer."
-    }
+    { "name": "Marina", "rating": 5, "lang": "fr", "date": "2026-08-02", "published": true, "txt": "Les meilleurs cours privés que j'ai suivis. Puto décortique chaque détail et ma Kizomba a complètement changé en quelques séances." },
+    { "name": "Sofia", "rating": 5, "lang": "en", "date": "2026-08-05", "published": true, "txt": "A true reference for Semba. The musicality work is on another level. Highly recommend." },
+    { "name": "João", "rating": 5, "lang": "pt", "date": "2026-08-07", "published": true, "txt": "Aulas incríveis. O Puto ensina a verdadeira essência do Semba, com muita paciência e energia. Recomendo demais!" }
   ]
 }

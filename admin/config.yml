@@ -213,5 +213,5 @@ collections:
                   - { label: "Portugais", value: "pt" }
                   - { label: "Espagnol", value: "es" }
                 default: "fr"
-              - { label: "Date", name: "date", widget: "date", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false }
+              - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD/MM/YYYY", time_format: false, required: false }
               - { label: "Texte de l'avis", name: "txt", widget: "text" }
