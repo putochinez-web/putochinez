@@ -2,6 +2,20 @@
   "bookings": [
     {
       "status": "A traiter",
+      "name": "DIAG-Test",
+      "email": "ptoffa@gmail.com",
+      "course": "Solo — 2h",
+      "quantity": "1",
+      "date": "2026-08-20",
+      "total": "140 €",
+      "promo": "",
+      "message": "",
+      "lang": "fr",
+      "received": "2026-08-10 12:34",
+      "note": ""
+    },
+    {
+      "status": "A traiter",
       "name": "PTO",
       "email": "ptoffa@gmail.com",
       "course": "Solo — 2h",
