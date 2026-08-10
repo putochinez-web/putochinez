@@ -1,3 +1,18 @@
 {
-  "bookings": []
+  "bookings": [
+    {
+      "status": "A traiter",
+      "name": "PTO",
+      "email": "ptoffa@gmail.com",
+      "course": "Solo — 2h",
+      "quantity": "1",
+      "date": "2026-08-15",
+      "total": "140 €",
+      "promo": "",
+      "message": "cadre",
+      "lang": "en",
+      "received": "2026-08-10 12:01",
+      "note": ""
+    }
+  ]
 }
