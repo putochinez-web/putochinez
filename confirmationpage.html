@@ -101,18 +101,15 @@ var UI={
     presets:["Esplanade de la BNF – Métro 14","L'Haÿ-les-Roses – Métro 14","À votre domicile (à préciser)"],
     subject:"Confirmation de votre cours — Puto Chinez",
     body:function(d){
-      var s="Bonjour "+(d.name||"")+", \n";
-      s+=" Merci pour votre demande ! J'ai le plaisir de vous confirmer votre cours "+(d.course||"")+" .\n\n";
-      s+=" \n";
-      s+=" Créneau proposé : \n";
-      s+="Date : "+(d.date||"")+"  Horaire : \n";
-      s+="de "+(d.start||"")+" à "+(d.end||"")+" \n";
-      s+=" Lieu : "+(d.addr||"")+"\n";
-      if(d.studio){ s+="\n Ou possibilité de réserver un studio de danse à Paris, à votre charge.\n"; }
-      s+="\n \n";
-      s+="  Le paiement se fait sur place. Si ce créneau vous convient, répondez-moi pour valider  -  sinon nous trouverons une autre date ensemble.\n\n";
-      s+=" À très vite!\n\n";
-      s+=" Puto Chinez";
+      var s="Bonjour "+(d.name||"")+",\n\n";
+      s+="Merci pour votre demande ! J'ai le plaisir de vous confirmer votre cours "+(d.course||"")+".\n\n";
+      s+="Créneau proposé :\n";
+      s+="Date : "+(d.date||"")+"\n";
+      s+="Horaire : de "+(d.start||"")+" à "+(d.end||"")+"\n";
+      s+="Lieu : "+(d.addr||"")+"\n";
+      if(d.studio){ s+="Ou possibilité de réserver un studio de danse à Paris, à votre charge.\n"; }
+      s+="\nLe paiement se fait sur place. Si ce créneau vous convient, répondez-moi pour valider — sinon nous trouverons une autre date ensemble.\n\n";
+      s+="À très vite !\nPuto Chinez";
       return s;
     }
   },
@@ -125,18 +122,15 @@ var UI={
     presets:["Esplanade de la BNF – Métro 14","L'Haÿ-les-Roses – Métro 14","At your home (to be specified)"],
     subject:"Your class is confirmed — Puto Chinez",
     body:function(d){
-      var s="Hi "+(d.name||"")+", \n";
-      s+=" Thank you for your request! I'm happy to confirm your "+(d.course||"")+" class.\n\n";
-      s+=" \n";
-      s+=" Proposed slot: \n";
-      s+="Date: "+(d.date||"")+"  Time: \n";
-      s+="from "+(d.start||"")+" to "+(d.end||"")+" \n";
-      s+=" Location: "+(d.addr||"")+"\n";
-      if(d.studio){ s+="\n Or you can book a dance studio in Paris, at your own expense.\n"; }
-      s+="\n \n";
-      s+="  Payment is made on site. If this slot works for you, reply to confirm  -  otherwise we'll find another date together.\n\n";
-      s+=" See you soon!\n\n";
-      s+=" Puto Chinez";
+      var s="Hi "+(d.name||"")+",\n\n";
+      s+="Thank you for your request! I'm happy to confirm your "+(d.course||"")+" class.\n\n";
+      s+="Proposed slot:\n";
+      s+="Date: "+(d.date||"")+"\n";
+      s+="Time: from "+(d.start||"")+" to "+(d.end||"")+"\n";
+      s+="Location: "+(d.addr||"")+"\n";
+      if(d.studio){ s+="Or you can book a dance studio in Paris, at your own expense.\n"; }
+      s+="\nPayment is made on site. If this slot works for you, reply to confirm — otherwise we'll find another date together.\n\n";
+      s+="See you soon !\nPuto Chinez";
       return s;
     }
   }
