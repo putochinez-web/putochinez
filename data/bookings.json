@@ -2,6 +2,20 @@
   "bookings": [
     {
       "status": "A traiter",
+      "name": "TOTORONO",
+      "email": "ptoffa@gmail.com",
+      "course": "Solo — 5h pack",
+      "quantity": "2",
+      "date": "2026-08-19",
+      "total": "550 €",
+      "promo": "",
+      "message": "cadre",
+      "lang": "en",
+      "received": "2026-08-10 13:28",
+      "note": ""
+    },
+    {
+      "status": "A traiter",
       "name": "TEST-CLAUDE",
       "email": "test-visiteur@example.com",
       "course": "Solo — 2h",
