@@ -1,3 +1,40 @@
 {
-  "bookings": []
+  "bookings": [
+    {
+      "status": "A traiter",
+      "name": "PTO",
+      "email": "ptoffa@gmail.com",
+      "course": "Solo — 2h",
+      "quantity": "1",
+      "date": "2026-08-15",
+      "total": "140 €",
+      "promo": "",
+      "message": "cadre",
+      "lang": "en",
+      "received": "2026-08-10 12:01",
+      "note": ""
+    },
+    {
+      "status": "A traiter",
+      "name": "Toto",
+      "email": "ptoffa@gmail.com",
+      "course": "Solo — 5h pack",
+      "quantity": "1",
+      "date": "2026-08-14",
+      "total": "275 €",
+      "promo": "",
+      "message": "technique",
+      "lang": "en",
+      "received": "2026-08-10 09:42",
+      "note": ""
+    },
+    {
+      "status": "Confirmee",
+      "email": "francis.niyonkuru@gmail.com",
+      "name": "Francis",
+      "course": "Solo — 1h",
+      "date": "2026-08-22",
+      "message": "Renforcement des bases, posture et cadre."
+    }
+  ]
 }
