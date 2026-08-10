@@ -1,3 +1,12 @@
 {
-  "bookings": []
+  "bookings": [
+    {
+      "status": "A traiter",
+      "email": "francis.niyonkuru@gmail.com",
+      "name": "Francis",
+      "course": "Solo — 1h",
+      "date": "2026-08-22",
+      "message": "Renforcement des bases, posture et cadre."
+    }
+  ]
 }
