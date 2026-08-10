@@ -25,31 +25,35 @@ function buildEmail(b) {
   const date = fmtDate(b.confirm_date, lang);
   const start = b.confirm_start || '';
   const end = b.confirm_end || '';
-  const addr = b.confirm_addr || '';
+  let addr = (b.confirm_addr_autre || '').trim();
+  if (!addr) { addr = b.confirm_addr || ''; if (addr.indexOf('Autre') === 0) addr = ''; }
+  const extra = (b.confirm_msg || '').trim();
   const course = b.course || '';
   const name = b.name || '';
   const studio = !!b.confirm_studio;
   if (lang === 'en') {
-    let s = "Hi " + name + ", \n";
-    s += " Thank you for your request! I'm happy to confirm your " + course + " class.\n\n";
-    s += " \n Proposed slot: \n";
-    s += "Date: " + date + "  Time: \n";
-    s += "from " + start + " to " + end + " \n";
-    s += " Location: " + addr + "\n";
-    if (studio) s += "\n Or you can book a dance studio in Paris, at your own expense.\n";
-    s += "\n \n  Payment is made on site. If this slot works for you, reply to confirm  -  otherwise we'll find another date together.\n\n";
-    s += " See you soon!\n\n Puto Chinez";
+    let s = "Hi " + name + ",\n\n";
+    s += "Thank you for your request! I'm happy to confirm your " + course + " class.\n\n";
+    s += "Proposed slot:\n";
+    s += "Date: " + date + "\n";
+    s += "Time: from " + start + " to " + end + "\n";
+    s += "Location: " + addr + "\n";
+    if (studio) s += "Or you can book a dance studio in Paris, at your own expense.\n";
+    if (extra) s += "\n" + extra + "\n";
+    s += "\nPayment is made on site. If this slot works for you, reply to confirm — otherwise we'll find another date together.\n\n";
+    s += "See you soon!\nPuto Chinez";
     return { subject: "Your class is confirmed — Puto Chinez", text: s };
   }
-  let s = "Bonjour " + name + ", \n";
-  s += " Merci pour votre demande ! J'ai le plaisir de vous confirmer votre cours " + course + " .\n\n";
-  s += " \n Créneau proposé : \n";
-  s += "Date : " + date + "  Horaire : \n";
-  s += "de " + start + " à " + end + " \n";
-  s += " Lieu : " + addr + "\n";
-  if (studio) s += "\n Ou possibilité de réserver un studio de danse à Paris, à votre charge.\n";
-  s += "\n \n  Le paiement se fait sur place. Si ce créneau vous convient, répondez-moi pour valider  -  sinon nous trouverons une autre date ensemble.\n\n";
-  s += " À très vite!\n\n Puto Chinez";
+  let s = "Bonjour " + name + ",\n\n";
+  s += "Merci pour votre demande ! J'ai le plaisir de vous confirmer votre cours " + course + ".\n\n";
+  s += "Créneau proposé :\n";
+  s += "Date : " + date + "\n";
+  s += "Horaire : de " + start + " à " + end + "\n";
+  s += "Lieu : " + addr + "\n";
+  if (studio) s += "Ou possibilité de réserver un studio de danse à Paris, à votre charge.\n";
+  if (extra) s += "\n" + extra + "\n";
+  s += "\nLe paiement se fait sur place. Si ce créneau vous convient, répondez-moi pour valider — sinon nous trouverons une autre date ensemble.\n\n";
+  s += "À très vite !\nPuto Chinez";
   return { subject: "Confirmation de votre cours — Puto Chinez", text: s };
 }
 
