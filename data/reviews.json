@@ -1,6 +1,14 @@
 {
   "reviews": [
     {
+      "name": "Mlyn",
+      "rating": 5,
+      "lang": "fr",
+      "date": "2026-08-12",
+      "published": false,
+      "txt": "Une expertise aiguisée, un sens du détail qui fait toute la différence. Encyclopédie vivante, on apprend sur tous les plans. Maintenant, on se met au travail pour qu' El Maestro soit fier de nous."
+    },
+    {
       "name": "Eddu",
       "rating": 5,
       "lang": "en",
