@@ -1,6 +1,14 @@
 {
   "reviews": [
     {
+      "name": "Charles Sembakiz",
+      "rating": 5,
+      "lang": "en",
+      "date": "2026-08-12",
+      "published": false,
+      "txt": "Gostei muito da aula com Puto Chinez, ele te recebe em um ambiente descontraído e depois coloca uma atmosfera mais seriosa para o trabalho! Puto nos compartilha sua pedagogia, toma notas e oferece um acompanhamento real para progredir bem, eu recomendo-o vivamente!"
+    },
+    {
       "name": "Mlyn",
       "rating": 5,
       "lang": "fr",
