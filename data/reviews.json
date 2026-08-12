@@ -5,7 +5,7 @@
       "rating": 5,
       "lang": "en",
       "date": "2026-08-12",
-      "published": false,
+      "published": true,
       "txt": "Gostei muito da aula com Puto Chinez, ele te recebe em um ambiente descontraído e depois coloca uma atmosfera mais seriosa para o trabalho! Puto nos compartilha sua pedagogia, toma notas e oferece um acompanhamento real para progredir bem, eu recomendo-o vivamente!"
     },
     {
@@ -13,7 +13,7 @@
       "rating": 5,
       "lang": "fr",
       "date": "2026-08-12",
-      "published": false,
+      "published": true,
       "txt": "Une expertise aiguisée, un sens du détail qui fait toute la différence. Encyclopédie vivante, on apprend sur tous les plans. Maintenant, on se met au travail pour qu' El Maestro soit fier de nous."
     },
     {
@@ -46,7 +46,7 @@
       "lang": "pt",
       "date": "2026-08-07",
       "published": true,
-      "txt": "Aulas incríveis. O Puto ensina a verdadeira essência do Semba, com muita paciência e energia. Recomendo demais!"
+      "txt": "Aulas incríveis. Puto Chinez ensina a verdadeira essência do Semba, com muita paciência e energia. Recomendo demais!"
     }
   ]
 }
