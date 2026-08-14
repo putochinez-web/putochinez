@@ -267,6 +267,7 @@
     <a href="#bio" data-nav="#bio" data-i18n="nav_bio">Biographie</a>
     <a href="#book" data-nav="#book" data-i18n="nav_book">Réserver un cours</a>
     <a href="#reviews" data-nav="#reviews" data-i18n="nav_reviews">Donner un avis</a>
+    <a href="#contact" data-nav="#contact" data-i18n="nav_contact">Une question ?</a>
     <a href="/admin" target="_blank" rel="noopener" class="nav-admin" data-i18n="nav_admin" style="display:none;">🔒 Admin</a>
   </nav>
 </div>
@@ -425,6 +426,30 @@
   </div>
 </section>
 
+<!-- CONTACT -->
+<section id="contact" class="reveal">
+  <div class="wrap">
+    <div class="center">
+      <div class="div"><span>•</span></div>
+      <h2 class="section-title" data-i18n="contact_title">A question?</h2>
+    </div>
+    <p class="chip-hint" style="text-align:center;max-width:520px;margin:0 auto 14px;" data-i18n="contact_sub">A question before booking? Send me a message — I'll reply by email.</p>
+    <div class="book-card" style="max-width:640px;margin:0 auto;">
+      <form id="contactFormEl" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="hp"><label>Ne pas remplir : <input name="bot-field" /></label></p>
+        <div class="two">
+          <div class="field"><label data-i18n="f_name">Your name</label><input id="ctname" name="name" type="text" required data-i18n-ph="ph_first" placeholder="First name" /></div>
+          <div class="field"><label data-i18n="f_email">Your email</label><input id="ctemail" name="email" type="email" required placeholder="you@email.com" /></div>
+        </div>
+        <div class="field"><label data-i18n="contact_msg">Your message</label><textarea id="ctmsg" name="message" required data-i18n-ph="contact_ph" placeholder="Your question…"></textarea></div>
+        <button type="submit" class="btn btn-gold" style="width:100%;" data-i18n="contact_send">Send message ✉</button>
+        <div id="contactMsg" class="form-msg" hidden></div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
   <div class="wrap">
@@ -446,7 +471,7 @@
 var I18N = {
   en:{
     hero_script:"Private", hero_big:"Classes",
-    enhance:"Enhance your dance", nav_menu:"Menu", nav_home:"Home", nav_bio:"Biography", nav_book:"Book a class", nav_reviews:"Leave a review", nav_admin:"🔒 Admin",
+    enhance:"Enhance your dance", nav_menu:"Menu", nav_home:"Home", nav_bio:"Biography", nav_book:"Book a class", nav_reviews:"Leave a review", nav_contact:"A question?", nav_admin:"🔒 Admin", contact_title:"A question?", contact_sub:"A question before booking? Send me a message — I'll reply by email.", contact_msg:"Your message", contact_ph:"Your question…", contact_send:"Send message ✉", contact_ok:"Thank you! Your message has been sent. I'll reply very soon ✨", contact_err:"Oops, sending failed. Please reach me directly via Instagram DM or email just below.",
     modes:"Solo &nbsp;|&nbsp; Couple or small group",
     pillars:"Foundations <b>•</b> Technique <b>•</b> Musicality",
     cta_book:"Book your session →",
@@ -494,7 +519,7 @@ var I18N = {
   },
   fr:{
     hero_script:"Cours", hero_big:"Privés",
-    enhance:"Sublimez votre danse", nav_menu:"Menu", nav_home:"Accueil", nav_bio:"Biographie", nav_book:"Réserver un cours", nav_reviews:"Donner un avis", nav_admin:"🔒 Admin",
+    enhance:"Sublimez votre danse", nav_menu:"Menu", nav_home:"Accueil", nav_bio:"Biographie", nav_book:"Réserver un cours", nav_reviews:"Donner un avis", nav_contact:"Une question ?", nav_admin:"🔒 Admin", contact_title:"Une question ?", contact_sub:"Une question avant de réserver ? Écrivez-moi, je réponds par email.", contact_msg:"Votre message", contact_ph:"Votre question…", contact_send:"Envoyer le message ✉", contact_ok:"Merci ! Votre message a bien été envoyé. Je vous réponds très vite ✨", contact_err:"Oups, l'envoi n'a pas fonctionné. Écrivez-moi directement en DM Instagram ou par email juste en dessous.",
     modes:"Solo &nbsp;|&nbsp; Couple ou petit groupe",
     pillars:"Fondations <b>•</b> Technique <b>•</b> Musicalité",
     cta_book:"Réserver un cours →",
@@ -787,10 +812,14 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
   btn.disabled = true;
   submitNetlify(form).then(function(r){
     if(!r.ok) throw new Error('bad');
-    form.querySelectorAll('.field, .two, button[type=submit]').forEach(function(el){ el.style.display='none'; });
+    form.reset();
+    buildPricing(currentLang);
+    btn.disabled = false;
+    msg.classList.remove('err');
     msg.textContent = I18N[currentLang].book_ok;
     msg.hidden = false;
     msg.scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(function(){ msg.hidden = true; }, 6000);
   }).catch(function(){
     btn.disabled = false;
     msg.classList.add('err');
@@ -798,6 +827,25 @@ document.getElementById('bookForm').addEventListener('submit', function(e){
     msg.hidden = false;
   });
 });
+
+/* ---------- contact form (goes to your email via Netlify Forms) ---------- */
+(function(){
+  var f=document.getElementById('contactFormEl'); if(!f) return;
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var form=e.target, btn=form.querySelector('button[type=submit]'), msg=document.getElementById('contactMsg');
+    btn.disabled=true; msg.hidden=true; msg.classList.remove('err');
+    submitNetlify(form).then(function(r){
+      if(!r.ok) throw new Error('bad');
+      form.reset(); btn.disabled=false;
+      msg.textContent=I18N[currentLang].contact_ok; msg.hidden=false;
+      setTimeout(function(){ msg.hidden=true; }, 6000);
+    }).catch(function(){
+      btn.disabled=false; msg.classList.add('err');
+      msg.textContent=I18N[currentLang].contact_err; msg.hidden=false;
+    });
+  });
+})();
 
 /* ---------- reviews ---------- */
 var chosenRating = 0;
