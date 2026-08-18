@@ -1,35 +1,35 @@
 {
-  "classes_lead": {
-    "fr": "Plus de 17 ans d'expérience en Kizomba & Semba. Que vous soyez débutant ou danseur confirmé, chaque cours est adapté à vos objectifs. Construisez des bases solides, améliorez votre technique, votre musicalité, votre connexion et votre confiance sur la piste.",
-    "en": "17+ years of experience in Kizomba & Semba. Whether you're a beginner or an experienced dancer, each class is tailored to your goals. Build solid foundations, improve your technique, musicality, connection, and confidence on the dance floor."
+  "bio_since": {
+    "fr": "Professeur de danse international depuis 2011.",
+    "en": "International dance teacher since 2011."
   },
   "bio_champ": {
     "fr": "Champion Africadançar Kizomba 2011",
     "en": "Africadançar Kizomba Champion 2011"
   },
-  "bio_medals": {
-    "fr": "🥇 France · 🥈 Monde",
-    "en": "🥇 France · 🥈 World"
-  },
-  "bio_penatchon": {
-    "fr": "Co-fondateur de l'école de danse Penatchon",
-    "en": "Co-Founder of Penatchon Dance School"
-  },
   "bio_flores": {
     "fr": "Fondateur de l'école de danse Flores do Semba",
     "en": "Founder of Flores do Semba Dance School"
   },
-  "bio_since": {
-    "fr": "Professeur de danse international depuis 2011.",
-    "en": "International dance teacher since 2011."
+  "bio_medals": {
+    "fr": "🥇 France · 🥈 Monde",
+    "en": "🥇 France · 🥈 World"
+  },
+  "classes_lead": {
+    "fr": "Plus de 17 ans d'expérience en Kizomba & Semba. Que vous soyez débutant ou danseur confirmé, chaque cours est adapté à vos objectifs. Construisez des bases solides, améliorez votre technique, votre musicalité, votre connexion et votre confiance sur la piste.",
+    "en": "17+ years of experience in Kizomba & Semba. Whether you're a beginner or an experienced dancer, each class is tailored to your goals. Build solid foundations, improve your technique, musicality, connection, and confidence on the dance floor."
   },
   "bio_p1": {
     "fr": "Puto Chinez enseigne la Kizomba et la Semba depuis plus de 17 ans.",
     "en": "Puto Chinez has been teaching Kizomba and Semba for over 17 years."
   },
   "bio_p2": {
-    "fr": "Formé en France puis à la source en Angola lors de séjours immersifs consacrés à la technique et à la culture, il est considéré comme un pionnier ayant contribué à apporter une vision authentique de la Kizomba et de la Semba en France.",
+    "fr": "Formé en France puis à la source en Angola lors de séjours immersifs consacrés à la technique et à la culture, il est considéré comme un pionnier ayant contribué à apporter une vision authentique de la Kizomba et du Semba en France.",
     "en": "Trained in France and later at the source in Angola through immersive stays devoted to both technique and culture, he is regarded as a pioneer who helped bring an authentic vision of Kizomba and Semba to France."
+  },
+  "bio_penatchon": {
+    "fr": "Co-fondateur de l'école de danse Penatchon",
+    "en": "Co-Founder of Penatchon Dance School"
   },
   "bio_p3": {
     "fr": "En 2011, il est sacré Champion de France Africadançar et, la même année, Vice-Champion International Africadançar.",
