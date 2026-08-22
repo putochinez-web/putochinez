@@ -1,6 +1,14 @@
 {
   "reviews": [
     {
+      "name": "Francis",
+      "rating": 5,
+      "lang": "fr",
+      "date": "2026-08-22",
+      "published": false,
+      "txt": "Un prof avec beaucoup d’expérience! Vous permet de bien maîtriser les fondamentaux avec des explications claires et détaillés! Maîtrise la culture de différentes danses angolaises!"
+    },
+    {
       "name": "Charles Sembakiz",
       "rating": 5,
       "lang": "en",
