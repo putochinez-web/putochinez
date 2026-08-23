@@ -1,6 +1,14 @@
 {
   "reviews": [
     {
+      "name": "Akou & Moy",
+      "rating": 5,
+      "lang": "fr",
+      "date": "2026-08-23",
+      "published": false,
+      "txt": "Un grand merci à Puto pour ses cours ! Nous avons fait appel à lui dans le cadre d'un mariage et ses cours nous ont vraiment permis de progresser et de gagner en confiance. Pédagogue, patient et passionné, il s’est adapté à notre niveau et nous a accompagné avec beaucoup de bienveillance. \nUne très belle expérience que nous recommandons sans hésiter !"
+    },
+    {
       "name": "Francis",
       "rating": 5,
       "lang": "fr",
