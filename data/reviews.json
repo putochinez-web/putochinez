@@ -1,6 +1,14 @@
 {
   "reviews": [
     {
+      "name": "Rbo Jag",
+      "rating": 5,
+      "lang": "fr",
+      "date": "2026-08-30",
+      "published": false,
+      "txt": "Un prof unique dans son genre.\nUn Sensei incontournable.\nÉveille votre personnalité dans la danse en enrichissent votre niveau.\nDu coaching ontologique culturel est au rendez-vous.\nMaintenant,à vous de jouez!"
+    },
+    {
       "name": "Akou & Moy",
       "rating": 5,
       "lang": "fr",
