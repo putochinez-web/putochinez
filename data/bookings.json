@@ -1,6 +1,20 @@
 {
   "bookings": [
     {
+      "status": "A traiter",
+      "name": "Francis Niyonkuru",
+      "email": "francis.niyonkuru@gmail.com",
+      "course": "Solo — 2h",
+      "quantity": "1",
+      "date": "2026-10-25",
+      "total": "140 €",
+      "promo": "",
+      "message": "",
+      "lang": "fr",
+      "received": "2026-10-24 18:54",
+      "note": ""
+    },
+    {
       "received": "2026-08-10 13:28",
       "confirm_start": "15:32",
       "total": "550 €",
